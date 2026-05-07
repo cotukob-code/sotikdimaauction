@@ -447,13 +447,27 @@
    const display = document.getElementById('floor-image-display');
    const img = document.getElementById('floor-img');
    if (!display || !img) return;
-   img.onload = null;
-   img.onerror = function () {
-     this.style.background = '#E5D5C8';
-     this.src = '';
-   };
-   img.src = imageSrc;
-   display.classList.remove('hidden');
+   
+   // Проверяем существование файла перед загрузкой
+   fetch(imageSrc)
+     .then(response => {
+       if (response.ok) {
+         img.onload = null;
+         img.onerror = function () {
+           this.style.background = '#E5D5C8';
+           this.src = '';
+         };
+         img.src = imageSrc;
+         display.classList.remove('hidden');
+       } else {
+         console.error('Файл не найден:', imageSrc);
+         alert('Изображение не найдено: ' + imageSrc);
+       }
+     })
+     .catch(error => {
+       console.error('Ошибка при проверке файла:', error);
+       alert('Ошибка при загрузке изображения: ' + imageSrc);
+     });
  }
 
  document.querySelectorAll('.floor-tab-btn').forEach(btn => {
