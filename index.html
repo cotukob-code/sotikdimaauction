@@ -6,7 +6,10 @@
  <title>Аукцион Семьяны — Дом в селе</title>
  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+<<<<<<< HEAD
  <script src="/bids/bids_loader.js"></script>
+=======
+>>>>>>> 74bdc0d3127fe9c633ad62ea532ee2200d61dace
  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
  <script>
   tailwind.config = {
@@ -527,6 +530,7 @@
    btn.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-gold rounded-full animate-spin"></div>';
 
    try {
+<<<<<<< HEAD
      // Отправляем ставку через GitHub Actions
      const response = await fetch(`https://api.github.com/repos/${getRepo()}/dispatches`, {
        method: 'POST',
@@ -549,21 +553,32 @@
      }
      
      console.log('Bid submitted to GitHub Actions');
+=======
+     console.log('Ставка:', { name, phone, bid });
+     await new Promise(resolve => setTimeout(resolve, 1500));
+>>>>>>> 74bdc0d3127fe9c633ad62ea532ee2200d61dace
      
      document.getElementById('successMsg').classList.remove('hidden');
      document.getElementById('buyerName').value = '';
      document.getElementById('buyerPhone').value = '';
      document.getElementById('bidAmount').value = '';
+<<<<<<< HEAD
 
+=======
+     
+>>>>>>> 74bdc0d3127fe9c633ad62ea532ee2200d61dace
      setTimeout(() => {
        btn.disabled = false;
        btn.innerHTML = '<i data-lucide="send" style="width:16px;height:16px;"></i> Отправить ставку';
        lucide.createIcons();
      }, 2000);
+<<<<<<< HEAD
      
      // Обновляем список ставок
      setTimeout(loadBids, 1000);
      
+=======
+>>>>>>> 74bdc0d3127fe9c633ad62ea532ee2200d61dace
    } catch (e) {
      console.error('Ошибка при отправке ставки:', e);
      alert('Не удалось отправить ставку. Попробуйте позже или позвоните по телефону.');
@@ -587,6 +602,7 @@
    }
  }
  
+<<<<<<< HEAD
  function getRepo() {
    // Получаем имя репозитория из URL
    const path = window.location.pathname.split('/').filter(p => p);
@@ -597,6 +613,8 @@
    return 'sotik/obs-studio-auction';
  }
  
+=======
+>>>>>>> 74bdc0d3127fe9c633ad62ea532ee2200d61dace
  lucide.createIcons();
  document.getElementById('submitBtn').addEventListener('click', submitBid);
 </script>
