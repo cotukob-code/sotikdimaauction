@@ -6,9 +6,8 @@
  <title>Аукцион Семьяны — Дом в селе</title>
  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
- <script src="/_sdk/element_sdk.js"></script>
- <script src="/_sdk/data_sdk.js"></script>
- <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&amp;family=Poppins:wght@300;400;600&amp;display=swap" rel="stylesheet">
+ <script src="/bids/bids_loader.js"></script>
+ <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
  <script>
   tailwind.config = {
     theme: {
@@ -102,7 +101,6 @@
     box-shadow: 0 0 0 3px rgba(139,115,85,0.1);
   }
  </style>
- <style>body { box-sizing: border-box; }</style>
 </head>
 <body class="h-full bg-ivory font-sans text-charcoal overflow-y-auto">
 <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-cream">
@@ -110,46 +108,57 @@
   <div class="flex items-center gap-3">
    <div class="w-10 h-10 bg-gradient-to-br from-gold to-warmgray rounded-lg flex items-center justify-center">
     <i data-lucide="landmark" style="width:24px;height:24px;color:white;"></i>
-   </div><span class="font-serif text-lg font-semibold text-charcoal hidden sm:inline">Аукцион Семьяны</span>
-  </div><a href="tel:+79873927902" class="px-6 py-2.5 bg-charcoal text-white text-sm font-semibold hover:bg-gold transition-colors rounded-sm inline-flex items-center gap-2"> <i data-lucide="phone" style="width:20px;height:20px;"></i> Позвонить </a>
+   </div>
+   <span class="font-serif text-lg font-semibold text-charcoal hidden sm:inline">Аукцион Семьяны</span>
+  </div>
+  <a href="tel:+79873927902" class="px-6 py-2.5 bg-charcoal text-white text-sm font-semibold hover:bg-gold transition-colors rounded-sm inline-flex items-center gap-2">
+   <i data-lucide="phone" style="width:20px;height:20px;"></i> Позвонить
+  </a>
  </div>
 </header>
 <main class="max-w-6xl mx-auto px-6 py-12">
  <div class="flex gap-4 mb-12 border-b border-cream pb-0">
-  <button class="tab-button active px-4 py-3 text-sm font-semibold text-warmgray hover:text-charcoal transition-colors" data-tab="main">Главная</button> <button class="tab-button px-4 py-3 text-sm font-semibold text-warmgray hover:text-charcoal transition-colors" data-tab="details">Характеристики</button> <button class="tab-button px-4 py-3 text-sm font-semibold text-warmgray hover:text-charcoal transition-colors" data-tab="leaders">Рейтинг</button> <button class="tab-button px-4 py-3 text-sm font-semibold text-warmgray hover:text-charcoal transition-colors" data-tab="floorplan">Планировка</button>
+  <button class="tab-button active px-4 py-3 text-sm font-semibold text-warmgray hover:text-charcoal transition-colors" data-tab="main">Главная</button>
+  <button class="tab-button px-4 py-3 text-sm font-semibold text-warmgray hover:text-charcoal transition-colors" data-tab="details">Характеристики</button>
+  <button class="tab-button px-4 py-3 text-sm font-semibold text-warmgray hover:text-charcoal transition-colors" data-tab="leaders">Рейтинг</button>
+  <button class="tab-button px-4 py-3 text-sm font-semibold text-warmgray hover:text-charcoal transition-colors" data-tab="floorplan">Планировка</button>
  </div>
+
  <div id="main" class="tab-panel active fade-in">
   <section class="mb-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
    <div>
     <p class="text-xs uppercase tracking-wider text-gold font-semibold mb-3">Аукцион недвижимости</p>
-    <h1 class="font-serif text-5xl lg:text-6xl font-light text-charcoal mb-6 leading-tight" id="propertyTitle">Частный дом в селе Семьяны</h1>
-    <p class="text-lg text-warmgray max-w-2xl mb-8" id="propertyDesc">Жилой дом на участке 43 сотки. Приглашаем Вас принять участие в аукционе по покупке объекта недвижимости.</p>
+    <h1 class="font-serif text-5xl lg:text-6xl font-light text-charcoal mb-6 leading-tight">Частный дом в селе Семьяны</h1>
+    <p class="text-lg text-warmgray max-w-2xl mb-8">Жилой дом на участке 43 сотки. Приглашаем Вас принять участие в аукционе по покупке объекта недвижимости.</p>
     <div class="flex flex-col sm:flex-row gap-4">
-     <button class="open-bid-modal px-8 py-3.5 bg-charcoal text-white text-sm font-semibold hover:bg-gold transition-colors rounded-sm"> Участвовать в аукционе </button> <button class="open-info-modal px-8 py-3.5 border-2 border-charcoal text-charcoal text-sm font-semibold hover:bg-charcoal hover:text-white transition-colors rounded-sm"> Подробнее об объекте </button>
+     <button class="open-bid-modal px-8 py-3.5 bg-charcoal text-white text-sm font-semibold hover:bg-gold transition-colors rounded-sm">Участвовать в аукционе</button>
+     <button class="open-info-modal px-8 py-3.5 border-2 border-charcoal text-charcoal text-sm font-semibold hover:bg-charcoal hover:text-white transition-colors rounded-sm">Подробнее об объекте</button>
     </div>
    </div>
-   <div class="w-full h-64 lg:h-96 bg-cream rounded-lg flex items-center justify-center overflow-hidden"><img src="images/image1.jpeg" alt="Частный дом" class="w-full h-full object-cover" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#E5D5C8'; this.alt='Image unavailable';">
+   <div class="w-full h-64 lg:h-96 bg-cream rounded-lg flex items-center justify-center overflow-hidden">
+    <img src="images/image1.jpeg" alt="Частный дом" class="w-full h-full object-cover" loading="lazy" onerror="this.style.background='#E5D5C8';">
    </div>
   </section>
   <section class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
    <div class="card-hover p-6 bg-white rounded-lg border border-cream">
     <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Начальная цена</p>
-    <p class="font-serif text-2xl font-medium text-charcoal" id="startingPrice">850 000 ₽</p>
+    <p class="font-serif text-2xl font-medium text-charcoal">850 000 ₽</p>
    </div>
    <div class="card-hover p-6 bg-white rounded-lg border border-cream">
     <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Целевая цена</p>
-    <p class="font-serif text-2xl font-medium text-charcoal" id="targetPrice">1 750 000 ₽</p>
+    <p class="font-serif text-2xl font-medium text-charcoal">1 750 000 ₽</p>
    </div>
    <div class="card-hover p-6 bg-white rounded-lg border border-cream">
     <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Шаг ставки</p>
-    <p class="font-serif text-2xl font-medium text-charcoal" id="bidStep">150 000 ₽</p>
+    <p class="font-serif text-2xl font-medium text-charcoal">150 000 ₽</p>
    </div>
    <div class="card-hover p-6 bg-white rounded-lg border border-cream">
     <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Завершение</p>
-    <p class="font-serif text-2xl font-medium text-charcoal" id="endDate">15.07.2026</p>
+    <p class="font-serif text-2xl font-medium text-charcoal">15.07.2026</p>
    </div>
   </section>
  </div>
+
  <div id="details" class="tab-panel fade-in">
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
    <div class="lg:col-span-2">
@@ -157,7 +166,7 @@
     <div class="grid grid-cols-2 gap-6">
      <div class="p-6 bg-white rounded-lg border border-cream">
       <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Площадь дома</p>
-      <p class="font-serif text-2xl font-medium text-charcoal" id="houseArea">74 м²</p>
+      <p class="font-serif text-2xl font-medium text-charcoal">74 м²</p>
      </div>
      <div class="p-6 bg-white rounded-lg border border-cream">
       <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Жилая площадь</p>
@@ -165,12 +174,13 @@
      </div>
      <div class="p-6 bg-white rounded-lg border border-cream">
       <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Участок</p>
-      <p class="font-serif text-2xl font-medium text-charcoal" id="landArea">43 сотки</p>
+      <p class="font-serif text-2xl font-medium text-charcoal">43 сотки</p>
      </div>
      <div class="p-6 bg-white rounded-lg border border-cream">
       <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Статус</p>
       <div class="flex items-center gap-2">
-       <span class="w-2 h-2 bg-green-500 rounded-full"></span> <span class="text-sm font-semibold text-green-700">Активен</span>
+       <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+       <span class="text-sm font-semibold text-green-700">Активен</span>
       </div>
      </div>
     </div>
@@ -184,7 +194,11 @@
      <h3 class="font-serif text-xl font-light text-charcoal mb-4">Контактная информация</h3>
      <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Адрес</p>
      <p class="text-sm text-charcoal mb-4">Россия, Нижегородская область, Воротынский район, село Семьяны, улица Безводная, дом 42</p>
-     <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Горячая линия</p><a href="tel:+79873927902" class="inline-flex items-center gap-2 text-gold hover:text-charcoal transition-colors mb-4"> <i data-lucide="phone" style="width:18px;height:18px;"></i> <span class="font-semibold">+7 987 392-79-02</span> </a>
+     <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Горячая линия</p>
+     <a href="tel:+79873927902" class="inline-flex items-center gap-2 text-gold hover:text-charcoal transition-colors mb-4">
+      <i data-lucide="phone" style="width:18px;height:18px;"></i>
+      <span class="font-semibold">+7 987 392-79-02</span>
+     </a>
      <p class="text-xs text-warmgray mb-3">Позвоните на номер и оставьте голосовое сообщение с вашей ставкой.</p>
      <div class="pt-4 border-t border-cream text-xs text-warmgray">
       <p class="mb-1">Пн–Пт: 8:00–20:00 МСК</p>
@@ -194,6 +208,7 @@
    </div>
   </div>
  </div>
+
  <div id="leaders" class="tab-panel fade-in">
   <h2 class="font-serif text-3xl font-light text-charcoal mb-2">ТОП-3 лидера аукциона</h2>
   <p class="text-warmgray mb-6">Текущие ставки обновляются в реальном времени</p>
@@ -206,31 +221,37 @@
    </div>
   </div>
  </div>
+
  <div id="floorplan" class="tab-panel fade-in">
   <h2 class="font-serif text-3xl font-light text-charcoal mb-8">Планировка дома</h2>
   <div class="flex gap-2 mb-6 border-b border-cream">
-   <button class="floor-tab-btn active px-4 py-2.5 text-sm font-semibold text-warmgray border-b-2 border-gold" data-floor="1">1-й этаж</button> <button class="floor-tab-btn px-4 py-2.5 text-sm font-semibold text-warmgray border-b-2 border-transparent hover:border-gold transition-colors" data-floor="2">2-й этаж</button>
+   <button class="floor-tab-btn active px-4 py-2.5 text-sm font-semibold text-warmgray border-b-2 border-gold" data-floor="1">1-й этаж</button>
+   <button class="floor-tab-btn px-4 py-2.5 text-sm font-semibold text-warmgray border-b-2 border-transparent hover:border-gold transition-colors" data-floor="2">2-й этаж</button>
   </div>
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
    <div id="floor-1" class="floor-content">
     <h3 class="font-serif text-xl font-light text-charcoal mb-4">Планировка 1 этажа</h3>
     <div class="space-y-2">
-<iframe src="https://planner5d.onelink.me/stDT/txjj2yiz" style="width:960px;height:500px;border:none;" allowfullscreen></iframe>
      <div class="flex justify-between p-3 bg-cream rounded-lg">
-      <span class="text-sm font-semibold text-charcoal">Гостиная</span> <span class="text-sm text-warmgray">8 м²</span>
+      <span class="text-sm font-semibold text-charcoal">Гостиная</span>
+      <span class="text-sm text-warmgray">8 м²</span>
      </div>
      <div class="flex justify-between p-3 bg-cream rounded-lg cursor-pointer hover:bg-warmgray/10 transition-colors" onclick="showFloorImage('images/kitchen.jpeg')">
-      <span class="text-sm font-semibold text-charcoal">Кухня</span> <span class="text-sm text-warmgray">5 м²</span>
+      <span class="text-sm font-semibold text-charcoal">Кухня</span>
+      <span class="text-sm text-warmgray">5 м²</span>
      </div>
      <div class="flex justify-between p-3 bg-cream rounded-lg cursor-pointer hover:bg-warmgray/10 transition-colors" onclick="showFloorImage('images/table.jpeg')">
-      <span class="text-sm font-semibold text-charcoal">Столовая</span> <span class="text-sm text-warmgray">2 м²</span>
+      <span class="text-sm font-semibold text-charcoal">Столовая</span>
+      <span class="text-sm text-warmgray">2 м²</span>
      </div>
      <div class="flex justify-between p-3 bg-cream rounded-lg cursor-pointer hover:bg-warmgray/10 transition-colors" onclick="showFloorImage('images/plan1lev.webp')">
-      <span class="text-sm font-semibold text-charcoal">Прихожая</span> <span class="text-sm text-warmgray">2 м²</span>
+      <span class="text-sm font-semibold text-charcoal">Прихожая</span>
+      <span class="text-sm text-warmgray">2 м²</span>
      </div>
      <div class="space-y-2">
       <div class="flex justify-between p-3 bg-cream rounded-lg font-semibold text-charcoal cursor-pointer" onclick="toggleFloorSublist(this)">
-       <span class="text-sm">Санузел</span> <span class="text-sm text-warmgray">5 м²</span>
+       <span class="text-sm">Санузел</span>
+       <span class="text-sm text-warmgray">5 м²</span>
        <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
       </div>
       <div class="pl-4 space-y-2 overflow-hidden max-h-0 transition-all duration-300" data-sublist>
@@ -244,35 +265,42 @@
      </div>
     </div>
    </div>
-   <div id="floor-image-display" class="hidden lg:flex flex-col justify-center items-center"><img id="floor-img" src="" alt="Фото помещения" class="w-full h-auto rounded-lg shadow-lg" loading="lazy" onerror="console.error('Image failed:', this.src); this.style.background='#E5D5C8';">
+   <div id="floor-image-display" class="hidden lg:flex flex-col justify-center items-center">
+    <img id="floor-img" src="" alt="Фото помещения" class="w-full h-auto rounded-lg shadow-lg" loading="lazy" onerror="this.style.background='#E5D5C8';">
     <p class="text-xs text-warmgray mt-3 text-center">Кликните на помещение для просмотра</p>
    </div>
    <div id="floor-2" class="floor-content hidden">
     <h3 class="font-serif text-xl font-light text-charcoal mb-4">Планировка 2 этажа</h3>
     <div class="space-y-2">
      <div class="flex justify-between p-3 bg-cream rounded-lg">
-      <span class="text-sm font-semibold text-charcoal">Спальня 1</span> <span class="text-sm text-warmgray">18 м²</span>
+      <span class="text-sm font-semibold text-charcoal">Спальня 1</span>
+      <span class="text-sm text-warmgray">18 м²</span>
      </div>
      <div class="flex justify-between p-3 bg-cream rounded-lg">
-      <span class="text-sm font-semibold text-charcoal">Спальня 2</span> <span class="text-sm text-warmgray">15 м²</span>
+      <span class="text-sm font-semibold text-charcoal">Спальня 2</span>
+      <span class="text-sm text-warmgray">15 м²</span>
      </div>
      <div class="flex justify-between p-3 bg-cream rounded-lg">
-      <span class="text-sm font-semibold text-charcoal">Кабинет</span> <span class="text-sm text-warmgray">12 м²</span>
+      <span class="text-sm font-semibold text-charcoal">Кабинет</span>
+      <span class="text-sm text-warmgray">12 м²</span>
      </div>
      <div class="flex justify-between p-3 bg-cream rounded-lg">
-      <span class="text-sm font-semibold text-charcoal">Ванная комната</span> <span class="text-sm text-warmgray">8 м²</span>
+      <span class="text-sm font-semibold text-charcoal">Ванная комната</span>
+      <span class="text-sm text-warmgray">8 м²</span>
      </div>
      <div class="flex justify-between p-3 bg-cream rounded-lg">
-      <span class="text-sm font-semibold text-charcoal">Коридор</span> <span class="text-sm text-warmgray">6 м²</span>
+      <span class="text-sm font-semibold text-charcoal">Коридор</span>
+      <span class="text-sm text-warmgray">6 м²</span>
      </div>
     </div>
    </div>
   </div>
   <div class="flex items-center justify-center p-8 bg-cream rounded-lg mt-8">
-   <img src="images/plan1lev.webp" alt="План 1 этажа" class="w-full h-auto rounded-lg shadow-lg" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#E5D5C8';">
+   <img src="images/plan1lev.webp" alt="План 1 этажа" class="w-full h-auto rounded-lg shadow-lg" loading="lazy" onerror="this.style.background='#E5D5C8';">
   </div>
  </div>
 </main>
+
 <footer class="border-t border-cream bg-white py-12 mt-12">
  <div class="max-w-6xl mx-auto px-6">
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 pb-8 border-b border-cream">
@@ -289,13 +317,15 @@
     </ol>
    </div>
    <div>
-    <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-3">Контакты</p><a href="tel:+79873927902" class="text-sm text-gold hover:text-charcoal">+7 987 392-79-02</a>
+    <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-3">Контакты</p>
+    <a href="tel:+79873927902" class="text-sm text-gold hover:text-charcoal">+7 987 392-79-02</a>
     <p class="text-xs text-warmgray mt-2">Пн–Пт: 8:00–20:00 МСК</p>
    </div>
    <div>
     <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-3">Статус</p>
     <div class="flex items-center gap-2">
-     <span class="w-2 h-2 bg-green-500 rounded-full"></span> <span class="text-sm text-green-700 font-semibold">Аукцион активен</span>
+     <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+     <span class="text-sm text-green-700 font-semibold">Аукцион активен</span>
     </div>
    </div>
   </div>
@@ -305,13 +335,17 @@
   </div>
  </div>
 </footer>
+
 <div id="bidModal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-backdrop px-4 py-6">
  <div class="bg-white w-full max-w-md rounded-lg shadow-2xl max-h-[90vh] overflow-y-auto fade-in">
   <div class="sticky top-0 bg-white border-b border-cream p-6 flex justify-between items-center">
    <div>
     <p class="text-xs uppercase tracking-wider text-gold font-semibold">Участие в аукционе</p>
     <h3 class="font-serif text-xl font-light text-charcoal">Новая ставка</h3>
-   </div><button class="close-bid-modal p-2 hover:bg-cream rounded-lg"> <i data-lucide="x" style="width:20px;height:20px;color:#6B6560;"></i> </button>
+   </div>
+   <button class="close-bid-modal p-2 hover:bg-cream rounded-lg">
+    <i data-lucide="x" style="width:20px;height:20px;color:#6B6560;"></i>
+   </button>
   </div>
   <div class="p-6 space-y-4">
    <div id="successMsg" class="hidden p-4 bg-green-50 border border-green-200 rounded-lg flex gap-3">
@@ -322,32 +356,42 @@
     </div>
    </div>
    <div>
-    <label class="text-xs uppercase tracking-wider text-warmgray font-semibold block mb-2">Имя</label> <label
-           for="buyerName"> </label><input type="text" id="buyerName" placeholder="Иван Петров" class="w-full px-4 py-2.5 border border-cream rounded-lg bg-ivory input-focus">
+    <label class="text-xs uppercase tracking-wider text-warmgray font-semibold block mb-2">Имя</label>
+    <input type="text" id="buyerName" placeholder="Иван Петров" class="w-full px-4 py-2.5 border border-cream rounded-lg bg-ivory input-focus">
     <p class="error-text text-red-600 text-xs mt-1 hidden"></p>
    </div>
    <div>
-    <label class="text-xs uppercase tracking-wider text-warmgray font-semibold block mb-2">Телефон</label> <label
-           for="buyerPhone"> </label><input type="tel" id="buyerPhone" placeholder="+7 (987) 392-79-02" class="w-full px-4 py-2.5 border border-cream rounded-lg bg-ivory input-focus">
+    <label class="text-xs uppercase tracking-wider text-warmgray font-semibold block mb-2">Телефон</label>
+    <input type="tel" id="buyerPhone" placeholder="+7 (987) 392-79-02" class="w-full px-4 py-2.5 border border-cream rounded-lg bg-ivory input-focus">
     <p class="error-text text-red-600 text-xs mt-1 hidden"></p>
     <p class="text-xs text-warmgray mt-2">Номер будет опубликован частично</p>
    </div>
    <div>
-    <label class="text-xs uppercase tracking-wider text-warmgray font-semibold block mb-2">Ставка (₽)</label> <label
-           for="bidAmount"> </label><input type="number" id="bidAmount" placeholder="1000000" min="850000" class="w-full px-4 py-2.5 border border-cream rounded-lg bg-ivory input-focus">
+    <label class="text-xs uppercase tracking-wider text-warmgray font-semibold block mb-2">Ставка (₽)</label>
+    <input type="number" id="bidAmount" placeholder="1000000" min="850000" class="w-full px-4 py-2.5 border border-cream rounded-lg bg-ivory input-focus">
     <p class="error-text text-red-600 text-xs mt-1 hidden"></p>
     <p id="bidHint" class="text-xs text-warmgray mt-2">Минимум: 850 000 ₽</p>
-   </div><button id="submitBtn" class="w-full py-3 bg-charcoal text-white text-sm font-semibold hover:bg-gold transition-colors rounded-lg flex items-center justify-center gap-2"> <i data-lucide="send" style="width:16px;height:16px;"></i> Отправить ставку </button>
+   </div>
+   <button id="submitBtn" class="w-full py-3 bg-charcoal text-white text-sm font-semibold hover:bg-gold transition-colors rounded-lg flex items-center justify-center gap-2">
+    <i data-lucide="send" style="width:16px;height:16px;"></i> Отправить ставку
+   </button>
    <div class="text-center border-t border-cream pt-4">
-    <p class="text-xs text-warmgray mb-2">Или звоните:</p><a href="tel:+79873927902" class="inline-flex items-center gap-2 px-4 py-2 border border-gold text-gold hover:bg-gold hover:text-white transition-colors rounded-lg text-sm font-semibold"> <i data-lucide="phone" style="width:16px;height:16px;"></i> +7 987 392-79-02 </a>
+    <p class="text-xs text-warmgray mb-2">Или звоните:</p>
+    <a href="tel:+79873927902" class="inline-flex items-center gap-2 px-4 py-2 border border-gold text-gold hover:bg-gold hover:text-white transition-colors rounded-lg text-sm font-semibold">
+     <i data-lucide="phone" style="width:16px;height:16px;"></i> +7 987 392-79-02
+    </a>
    </div>
   </div>
  </div>
 </div>
+
 <div id="infoModal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-backdrop px-4 py-6">
  <div class="bg-white w-full max-w-2xl rounded-lg shadow-2xl max-h-[90vh] overflow-y-auto fade-in">
   <div class="sticky top-0 bg-white border-b border-cream p-6 flex justify-between items-center">
-   <h3 class="font-serif text-xl font-light text-charcoal">Об объекте</h3><button class="close-info-modal p-2 hover:bg-cream rounded-lg"> <i data-lucide="x" style="width:20px;height:20px;color:#6B6560;"></i> </button>
+   <h3 class="font-serif text-xl font-light text-charcoal">Об объекте</h3>
+   <button class="close-info-modal p-2 hover:bg-cream rounded-lg">
+    <i data-lucide="x" style="width:20px;height:20px;color:#6B6560;"></i>
+   </button>
   </div>
   <div class="p-6 space-y-6">
    <div>
@@ -373,137 +417,9 @@
   </div>
  </div>
 </div>
+
 <script>
  lucide.createIcons();
-
- // ===== Config & SDK =====
- const defaultConfig = {
-   property_title: 'Частный дом в селе Семьяны',
-   property_description: 'Жилой дом на участке 43 сотки',
-   starting_price: '850000',
-   target_price: '1750000',
-   bid_step: '150000',
-   contact_phone: '+79873927902',
-   property_area: '74',
-   land_area: '43',
-   end_date: '15.07.2026',
-   background_color: '#FAF9F6',
-   surface_color: '#FFFFFF',
-   text_color: '#1A1A1A',
-   primary_action_color: '#1A1A1A',
-   secondary_action_color: '#8B7355',
-   font_family: 'Cormorant Garamond',
-   font_size: 16
- };
-
- function formatPrice(val) {
-   return parseInt(val).toLocaleString('ru-RU') + ' ₽';
- }
-
- function applyConfig(cfg) {
-   const c = { ...defaultConfig, ...cfg };
-   document.getElementById('propertyTitle').textContent = c.property_title;
-   document.getElementById('propertyDesc').textContent = c.property_description;
-   document.getElementById('startingPrice').textContent = formatPrice(c.starting_price);
-   document.getElementById('targetPrice').textContent = formatPrice(c.target_price);
-   document.getElementById('bidStep').textContent = formatPrice(c.bid_step);
-   document.getElementById('endDate').textContent = c.end_date;
-   document.getElementById('houseArea').textContent = c.property_area + ' м²';
-   document.getElementById('landArea').textContent = c.land_area + ' соток';
-   document.getElementById('bidHint').textContent = 'Минимум: ' + formatPrice(c.starting_price);
-   document.getElementById('bidAmount').min = c.starting_price;
-   document.body.style.backgroundColor = c.background_color;
-
-   const fontFamily = `${c.font_family}, Georgia, serif`;
-   document.querySelectorAll('.font-serif').forEach(el => {
-     el.style.fontFamily = fontFamily;
-   });
- }
-
- window.elementSdk.init({
-   defaultConfig,
-   onConfigChange: (cfg) => applyConfig(cfg),
-   mapToCapabilities: (cfg) => ({
-     recolorables: [
-       { get: () => cfg.background_color || defaultConfig.background_color, set: (v) => { cfg.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
-       { get: () => cfg.surface_color || defaultConfig.surface_color, set: (v) => { cfg.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
-       { get: () => cfg.text_color || defaultConfig.text_color, set: (v) => { cfg.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
-       { get: () => cfg.primary_action_color || defaultConfig.primary_action_color, set: (v) => { cfg.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); } },
-       { get: () => cfg.secondary_action_color || defaultConfig.secondary_action_color, set: (v) => { cfg.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); } }
-     ],
-     borderables: [],
-     fontEditable: { get: () => cfg.font_family || defaultConfig.font_family, set: (v) => { cfg.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
-     fontSizeable: { get: () => cfg.font_size || defaultConfig.font_size, set: (v) => { cfg.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
-   }),
-   mapToEditPanelValues: (cfg) => new Map([
-     ['property_title', cfg.property_title || defaultConfig.property_title],
-     ['property_description', cfg.property_description || defaultConfig.property_description],
-     ['starting_price', cfg.starting_price || defaultConfig.starting_price],
-     ['target_price', cfg.target_price || defaultConfig.target_price],
-     ['bid_step', cfg.bid_step || defaultConfig.bid_step],
-     ['contact_phone', cfg.contact_phone || defaultConfig.contact_phone],
-     ['property_area', cfg.property_area || defaultConfig.property_area],
-     ['land_area', cfg.land_area || defaultConfig.land_area],
-     ['end_date', cfg.end_date || defaultConfig.end_date]
-   ])
- });
-
- applyConfig(defaultConfig);
-
- // ===== Data SDK =====
- let allBids = [];
-
- const dataHandler = {
-   onDataChanged(data) {
-     allBids = data.sort((a, b) => b.bid_amount - a.bid_amount);
-     renderLeaders();
-   }
- };
-
- window.dataSdk.init(dataHandler);
-
- function maskPhone(phone) {
-   const clean = phone.replace(/\D/g, '');
-   const last4 = clean.slice(-4);
-   return `+7 (${clean.slice(1, 4)}) ***-**-${last4}`;
- }
-
- function renderLeaders() {
-   const container = document.getElementById('leadersList');
-   const top3 = allBids.slice(0, 3);
-
-   if (top3.length === 0) {
-     container.innerHTML = `
-       <div class="p-8 text-center">
-         <i data-lucide="users" style="width:40px;height:40px;color:#8B7355;opacity:0.3;margin:0 auto 1rem;"></i>
-         <p class="text-warmgray">Пока нет участников. Будьте первым!</p>
-       </div>
-     `;
-     lucide.createIcons();
-     return;
-   }
-
-   const badges = ['badge-gold', 'badge-silver', 'badge-bronze'];
-   let html = '';
-   top3.forEach((bid, i) => {
-     html += `
-       <div class="flex items-center gap-4 p-6 hover:bg-cream transition-colors">
-         <div class="leader-badge ${badges[i]}">${i + 1}</div>
-         <div class="flex-1">
-           <p class="font-semibold text-charcoal">${bid.buyer_name}</p>
-           <p class="text-xs text-warmgray">${maskPhone(bid.buyer_phone)}</p>
-         </div>
-         <div class="text-right">
-           <p class="font-serif font-semibold text-gold text-lg">${parseInt(bid.bid_amount).toLocaleString('ru-RU')} ₽</p>
-           <p class="text-xs text-warmgray">${new Date(bid.bid_date).toLocaleDateString('ru-RU')}</p>
-         </div>
-       </div>
-     `;
-   });
-
-   container.innerHTML = html;
-   lucide.createIcons();
- }
 
  // ===== Tab Navigation =====
  document.querySelectorAll('.tab-button').forEach(btn => {
@@ -553,11 +469,6 @@
    });
  });
 
- document.getElementById('bidCtaBtn').addEventListener('click', () => {
-   document.getElementById('bidModal').classList.remove('hidden');
-   document.getElementById('successMsg').classList.add('hidden');
- });
-
  document.querySelectorAll('.close-bid-modal').forEach(btn => {
    btn.addEventListener('click', () => {
      document.getElementById('bidModal').classList.add('hidden');
@@ -589,18 +500,19 @@
    const name = document.getElementById('buyerName').value.trim();
    const phone = document.getElementById('buyerPhone').value.trim();
    const bid = document.getElementById('bidAmount').value.trim();
-   const minBid = parseInt(defaultConfig.starting_price);
+   const minBid = 850000;
 
    const inputs = [
-     { el: document.getElementById('buyerName'), regex: /.+/ },
-     { el: document.getElementById('buyerPhone'), regex: /^\+?7\s?\(?9\d{2}\)?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/ },
-     { el: document.getElementById('bidAmount'), regex: /^\d+$/, custom: (v) => parseInt(v) >= minBid }
+     { el: document.getElementById('buyerName'), regex: /.+/, msg: 'Введите имя' },
+     { el: document.getElementById('buyerPhone'), regex: /^\+?7\s?\(?9\d{2}\)?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/, msg: 'Неверный номер' },
+     { el: document.getElementById('bidAmount'), regex: /^\d+$/, custom: (v) => parseInt(v) >= minBid, msg: 'Минимум ' + minBid }
    ];
 
    let valid = true;
    inputs.forEach(inp => {
      const error = inp.el.nextElementSibling;
      if (!inp.regex.test(inp.el.value) || (inp.custom && !inp.custom(inp.el.value))) {
+       error.textContent = inp.msg;
        error.classList.remove('hidden');
        valid = false;
      } else {
@@ -615,33 +527,46 @@
    btn.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-gold rounded-full animate-spin"></div>';
 
    try {
-     const res = await window.dataSdk.create({
-       id: Date.now().toString(),
-       buyer_name: name,
-       buyer_phone: phone,
-       bid_amount: parseInt(bid),
-       bid_date: new Date().toISOString(),
-       status: 'active'
+     // Отправляем ставку через GitHub Actions
+     const response = await fetch(`https://api.github.com/repos/${getRepo()}/dispatches`, {
+       method: 'POST',
+       headers: {
+         'Accept': 'application/vnd.github.everest-preview+json',
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify({
+         event_type: 'save_bid',
+         client_payload: {
+           buyer_name: name,
+           buyer_phone: phone,
+           bid_amount: bid
+         }
+       })
      });
+     
+     if (!response.ok) {
+       throw new Error(`GitHub API error: ${response.status}`);
+     }
+     
+     console.log('Bid submitted to GitHub Actions');
+     
+     document.getElementById('successMsg').classList.remove('hidden');
+     document.getElementById('buyerName').value = '';
+     document.getElementById('buyerPhone').value = '';
+     document.getElementById('bidAmount').value = '';
 
-     if (res.isOk) {
-       document.getElementById('successMsg').classList.remove('hidden');
-       document.getElementById('buyerName').value = '';
-       document.getElementById('buyerPhone').value = '';
-       document.getElementById('bidAmount').value = '';
-       setTimeout(() => {
-         btn.disabled = false;
-         btn.innerHTML = '<i data-lucide="send" style="width:16px;height:16px;"></i> Отправить ставку';
-         lucide.createIcons();
-       }, 2000);
-     } else {
-       alert('Ошибка: ' + (res.error?.message || 'Попробуйте снова'));
+     setTimeout(() => {
        btn.disabled = false;
        btn.innerHTML = '<i data-lucide="send" style="width:16px;height:16px;"></i> Отправить ставку';
        lucide.createIcons();
-     }
+     }, 2000);
+     
+     // Обновляем список ставок
+     setTimeout(loadBids, 1000);
+     
    } catch (e) {
-     alert('Ошибка: ' + e.message);
+     console.error('Ошибка при отправке ставки:', e);
+     alert('Не удалось отправить ставку. Попробуйте позже или позвоните по телефону.');
      btn.disabled = false;
      btn.innerHTML = '<i data-lucide="send" style="width:16px;height:16px;"></i> Отправить ставку';
      lucide.createIcons();
@@ -652,7 +577,7 @@
  function toggleFloorSublist(element) {
    const sublist = element.nextElementSibling;
    const icon = element.querySelector('i[data-lucide="chevron-down"]');
-   
+
    if (sublist.style.maxHeight) {
      sublist.style.maxHeight = null;
      icon.style.transform = 'rotate(0deg)';
@@ -662,10 +587,18 @@
    }
  }
  
- // Initialize Lucide icons
+ function getRepo() {
+   // Получаем имя репозитория из URL
+   const path = window.location.pathname.split('/').filter(p => p);
+   if (path.length >= 2) {
+     return `${path[0]}/${path[1]}`;
+   }
+   // Замените на ваше значение: username/repository
+   return 'sotik/obs-studio-auction';
+ }
+ 
  lucide.createIcons();
-
  document.getElementById('submitBtn').addEventListener('click', submitBid);
 </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f74023374892b66',t:'MTc3ODAyODgxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
