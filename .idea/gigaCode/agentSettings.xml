@@ -6,6 +6,21 @@
         <Execute>
           <option name="pattern" value="mkdir &quot;C:/Users/sotik/OneDrive/Документы/GitHub/OBS Studio/auction/sotikdimaauction/_sdk&quot;" />
         </Execute>
+        <Execute>
+          <option name="pattern" value="cd &quot;C:/Users/sotik/OneDrive/Документы/GitHub/OBS Studio/auction/sotikdimaauction&quot; &amp;&amp; git status" />
+        </Execute>
+        <Execute>
+          <option name="pattern" value="cd &quot;C:/Users/sotik/OneDrive/Документы/GitHub/OBS Studio/auction/sotikdimaauction&quot;; git status" />
+        </Execute>
+        <Execute>
+          <option name="pattern" value="cd &quot;C:/Users/sotik/OneDrive/Документы/GitHub/OBS Studio/auction/sotikdimaauction&quot;; mkdir .github\workflows" />
+        </Execute>
+        <Execute>
+          <option name="pattern" value="cd &quot;C:/Users/sotik/OneDrive/Документы/GitHub/OBS Studio/auction/sotikdimaauction&quot;; git add .; git commit -m &quot;Реализована работа с данными через GitHub Actions&quot;" />
+        </Execute>
+        <Execute>
+          <option name="pattern" value="cd &quot;C:/Users/sotik/OneDrive/Документы/GitHub/OBS Studio/auction/sotikdimaauction&quot;; git push" />
+        </Execute>
       </list>
     </option>
   </component>
