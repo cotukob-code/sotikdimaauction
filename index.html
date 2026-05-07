@@ -634,11 +634,22 @@
    const sublist = element.nextElementSibling;
    const icon = element.querySelector('i[data-lucide="chevron-down"]');
    if (!sublist || !icon) return;
+   
    if (sublist.style.maxHeight && sublist.style.maxHeight !== '0px') {
+     // Сворачиваем список
      sublist.style.maxHeight = '0px';
      icon.style.transform = 'rotate(0deg)';
    } else {
-     sublist.style.maxHeight = sublist.scrollHeight + 'px';
+     // Разворачиваем список
+     sublist.style.maxHeight = 'none';
+     const height = sublist.scrollHeight + 'px';
+     sublist.style.maxHeight = '0px';
+     
+     // Анимация разворачивания
+     requestAnimationFrame(() => {
+       sublist.style.maxHeight = height;
+     });
+     
      icon.style.transform = 'rotate(180deg)';
    }
  }
