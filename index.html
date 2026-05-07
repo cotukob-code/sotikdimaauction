@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="ru" class="h-full">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Аукцион Семьяны — Дом в селе</title>
+ <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+ <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+ <script src="/_sdk/element_sdk.js"></script>
+ <script src="/_sdk/data_sdk.js"></script>
+ <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&amp;family=Poppins:wght@300;400;600&amp;display=swap" rel="stylesheet">
+ <script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+          sans: ['Poppins', 'sans-serif']
+        },
+        colors: {
+          ivory: '#FAF9F6',
+          charcoal: '#1A1A1A',
+          warmgray: '#6B6560',
+          gold: '#8B7355',
+          cream: '#F5F0EB'
+        }
+      }
+    }
+  }
+ </script>
+ <style>
+  html, body { height: 100%; }
+  * { box-sizing: border-box; }
+
+  .card-hover {
+    transition: all 0.3s ease;
+  }
+
+  .card-hover:hover {
+    box-shadow: 0 12px 40px rgba(139,115,85,0.12);
+    transform: translateY(-2px);
+  }
+
+  .leader-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 1.125rem;
+    flex-shrink: 0;
+  }
+
+  .badge-gold { background: linear-gradient(135deg, #FFD700, #FFA500); box-shadow: 0 4px 15px rgba(255,215,0,0.2); }
+  .badge-silver { background: linear-gradient(135deg, #C0C0C0, #999); box-shadow: 0 4px 15px rgba(192,192,192,0.2); }
+  .badge-bronze { background: linear-gradient(135deg, #CD7F32, #996633); box-shadow: 0 4px 15px rgba(205,127,50,0.2); }
+
+  .tab-button {
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .tab-button.active {
+    color: #8B7355;
+    border-bottom-color: #8B7355;
+  }
+
+  .tab-panel {
+    display: none;
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-backdrop {
+    backdrop-filter: blur(4px);
+    background: rgba(26, 26, 26, 0.4);
+  }
+
+  .input-focus {
+    transition: all 0.2s;
+  }
+
+  .input-focus:focus {
+    outline: none;
+    border-color: #8B7355;
+    box-shadow: 0 0 0 3px rgba(139,115,85,0.1);
+  }
+ </style>
+ <style>body { box-sizing: border-box; }</style>
+</head>
+<body class="h-full bg-ivory font-sans text-charcoal overflow-y-auto">
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-cream">
+ <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+  <div class="flex items-center gap-3">
+   <div class="w-10 h-10 bg-gradient-to-br from-gold to-warmgray rounded-lg flex items-center justify-center">
+    <i data-lucide="landmark" style="width:24px;height:24px;color:white;"></i>
+   </div><span class="font-serif text-lg font-semibold text-charcoal hidden sm:inline">Аукцион Семьяны</span>
+  </div><a href="tel:+79873927902" class="px-6 py-2.5 bg-charcoal text-white text-sm font-semibold hover:bg-gold transition-colors rounded-sm inline-flex items-center gap-2"> <i data-lucide="phone" style="width:20px;height:20px;"></i> Позвонить </a>
+ </div>
+</header>
+<main class="max-w-6xl mx-auto px-6 py-12">
+ <div class="flex gap-4 mb-12 border-b border-cream pb-0">
+  <button class="tab-button active px-4 py-3 text-sm font-semibold text-warmgray hover:text-charcoal transition-colors" data-tab="main">Главная</button> <button class="tab-button px-4 py-3 text-sm font-semibold text-warmgray hover:text-charcoal transition-colors" data-tab="details">Характеристики</button> <button class="tab-button px-4 py-3 text-sm font-semibold text-warmgray hover:text-charcoal transition-colors" data-tab="leaders">Рейтинг</button> <button class="tab-button px-4 py-3 text-sm font-semibold text-warmgray hover:text-charcoal transition-colors" data-tab="floorplan">Планировка</button>
+ </div>
+ <div id="main" class="tab-panel active fade-in">
+  <section class="mb-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+   <div>
+    <p class="text-xs uppercase tracking-wider text-gold font-semibold mb-3">Аукцион недвижимости</p>
+    <h1 class="font-serif text-5xl lg:text-6xl font-light text-charcoal mb-6 leading-tight" id="propertyTitle">Частный дом в селе Семьяны</h1>
+    <p class="text-lg text-warmgray max-w-2xl mb-8" id="propertyDesc">Жилой дом на участке 43 сотки. Приглашаем Вас принять участие в аукционе по покупке объекта недвижимости.</p>
+    <div class="flex flex-col sm:flex-row gap-4">
+     <button class="open-bid-modal px-8 py-3.5 bg-charcoal text-white text-sm font-semibold hover:bg-gold transition-colors rounded-sm"> Участвовать в аукционе </button> <button class="open-info-modal px-8 py-3.5 border-2 border-charcoal text-charcoal text-sm font-semibold hover:bg-charcoal hover:text-white transition-colors rounded-sm"> Подробнее об объекте </button>
+    </div>
+   </div>
+   <div class="w-full h-64 lg:h-96 bg-cream rounded-lg flex items-center justify-center overflow-hidden"><img src="images/image1.jpeg" alt="Частный дом" class="w-full h-full object-cover" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#E5D5C8'; this.alt='Image unavailable';">
+   </div>
+  </section>
+  <section class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+   <div class="card-hover p-6 bg-white rounded-lg border border-cream">
+    <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Начальная цена</p>
+    <p class="font-serif text-2xl font-medium text-charcoal" id="startingPrice">850 000 ₽</p>
+   </div>
+   <div class="card-hover p-6 bg-white rounded-lg border border-cream">
+    <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Целевая цена</p>
+    <p class="font-serif text-2xl font-medium text-charcoal" id="targetPrice">1 750 000 ₽</p>
+   </div>
+   <div class="card-hover p-6 bg-white rounded-lg border border-cream">
+    <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Шаг ставки</p>
+    <p class="font-serif text-2xl font-medium text-charcoal" id="bidStep">150 000 ₽</p>
+   </div>
+   <div class="card-hover p-6 bg-white rounded-lg border border-cream">
+    <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Завершение</p>
+    <p class="font-serif text-2xl font-medium text-charcoal" id="endDate">15.07.2026</p>
+   </div>
+  </section>
+ </div>
+ <div id="details" class="tab-panel fade-in">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+   <div class="lg:col-span-2">
+    <h2 class="font-serif text-3xl font-light text-charcoal mb-6">Характеристики</h2>
+    <div class="grid grid-cols-2 gap-6">
+     <div class="p-6 bg-white rounded-lg border border-cream">
+      <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Площадь дома</p>
+      <p class="font-serif text-2xl font-medium text-charcoal" id="houseArea">74 м²</p>
+     </div>
+     <div class="p-6 bg-white rounded-lg border border-cream">
+      <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Жилая площадь</p>
+      <p class="font-serif text-2xl font-medium text-charcoal">50 м²</p>
+     </div>
+     <div class="p-6 bg-white rounded-lg border border-cream">
+      <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Участок</p>
+      <p class="font-serif text-2xl font-medium text-charcoal" id="landArea">43 сотки</p>
+     </div>
+     <div class="p-6 bg-white rounded-lg border border-cream">
+      <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Статус</p>
+      <div class="flex items-center gap-2">
+       <span class="w-2 h-2 bg-green-500 rounded-full"></span> <span class="text-sm font-semibold text-green-700">Активен</span>
+      </div>
+     </div>
+    </div>
+    <div class="mt-6 p-6 bg-white rounded-lg border border-cream">
+     <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-3">Описание</p>
+     <p class="text-warmgray leading-relaxed">Жилой дом построен в 2003 году. Площадь дома составляет 74 м². Участок площадью 43 сотки. Имеется баня с предбанником, крытый погреб большого размера. Дом в целом пригоден для проживания, но требуется ремонт засыпной шахты внешней стены (ориентировочная стоимость: от 150 000 рублей).</p>
+    </div>
+   </div>
+   <div class="lg:col-span-1">
+    <div class="p-6 bg-white rounded-lg border border-cream sticky top-24">
+     <h3 class="font-serif text-xl font-light text-charcoal mb-4">Контактная информация</h3>
+     <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Адрес</p>
+     <p class="text-sm text-charcoal mb-4">Россия, Нижегородская область, Воротынский район, село Семьяны, улица Безводная, дом 42</p>
+     <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-2">Горячая линия</p><a href="tel:+79873927902" class="inline-flex items-center gap-2 text-gold hover:text-charcoal transition-colors mb-4"> <i data-lucide="phone" style="width:18px;height:18px;"></i> <span class="font-semibold">+7 987 392-79-02</span> </a>
+     <p class="text-xs text-warmgray mb-3">Позвоните на номер и оставьте голосовое сообщение с вашей ставкой.</p>
+     <div class="pt-4 border-t border-cream text-xs text-warmgray">
+      <p class="mb-1">Пн–Пт: 8:00–20:00 МСК</p>
+      <p>Сб–Вс: 10:00–18:00 МСК</p>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div id="leaders" class="tab-panel fade-in">
+  <h2 class="font-serif text-3xl font-light text-charcoal mb-2">ТОП-3 лидера аукциона</h2>
+  <p class="text-warmgray mb-6">Текущие ставки обновляются в реальном времени</p>
+  <div class="bg-white rounded-lg border border-cream overflow-hidden">
+   <div id="leadersList" class="divide-y divide-cream">
+    <div class="p-8 text-center">
+     <i data-lucide="users" style="width:40px;height:40px;color:#8B7355;opacity:0.3;margin:0 auto 1rem;"></i>
+     <p class="text-warmgray">Пока нет участников. Будьте первым!</p>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div id="floorplan" class="tab-panel fade-in">
+  <h2 class="font-serif text-3xl font-light text-charcoal mb-8">Планировка дома</h2>
+  <div class="flex gap-2 mb-6 border-b border-cream">
+   <button class="floor-tab-btn active px-4 py-2.5 text-sm font-semibold text-warmgray border-b-2 border-gold" data-floor="1">1-й этаж</button> <button class="floor-tab-btn px-4 py-2.5 text-sm font-semibold text-warmgray border-b-2 border-transparent hover:border-gold transition-colors" data-floor="2">2-й этаж</button>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+   <div id="floor-1" class="floor-content">
+    <h3 class="font-serif text-xl font-light text-charcoal mb-4">Планировка 1 этажа</h3>
+    <div class="space-y-2">
+<iframe src="https://planner5d.onelink.me/stDT/txjj2yiz" style="width:960px;height:500px;border:none;" allowfullscreen></iframe>
+     <div class="flex justify-between p-3 bg-cream rounded-lg">
+      <span class="text-sm font-semibold text-charcoal">Гостиная</span> <span class="text-sm text-warmgray">8 м²</span>
+     </div>
+     <div class="flex justify-between p-3 bg-cream rounded-lg cursor-pointer hover:bg-warmgray/10 transition-colors" onclick="showFloorImage('images/kitchen.jpeg')">
+      <span class="text-sm font-semibold text-charcoal">Кухня</span> <span class="text-sm text-warmgray">5 м²</span>
+     </div>
+     <div class="flex justify-between p-3 bg-cream rounded-lg cursor-pointer hover:bg-warmgray/10 transition-colors" onclick="showFloorImage('images/table.jpeg')">
+      <span class="text-sm font-semibold text-charcoal">Столовая</span> <span class="text-sm text-warmgray">2 м²</span>
+     </div>
+     <div class="flex justify-between p-3 bg-cream rounded-lg cursor-pointer hover:bg-warmgray/10 transition-colors" onclick="showFloorImage('images/plan1lev.webp')">
+      <span class="text-sm font-semibold text-charcoal">Прихожая</span> <span class="text-sm text-warmgray">2 м²</span>
+     </div>
+     <div class="space-y-2">
+      <div class="flex justify-between p-3 bg-cream rounded-lg font-semibold text-charcoal cursor-pointer" onclick="toggleFloorSublist(this)">
+       <span class="text-sm">Санузел</span> <span class="text-sm text-warmgray">5 м²</span>
+       <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+      </div>
+      <div class="pl-4 space-y-2 overflow-hidden max-h-0 transition-all duration-300" data-sublist>
+       <div class="flex justify-between p-3 bg-cream rounded-lg text-sm text-charcoal cursor-pointer hover:bg-warmgray/10 transition-colors" onclick="showFloorImage('images/lavatory.jpeg')">
+        <span>Туалет</span>
+       </div>
+       <div class="flex justify-between p-3 bg-cream rounded-lg text-sm text-charcoal cursor-pointer hover:bg-warmgray/10 transition-colors" onclick="showFloorImage('images/bath.jpeg')">
+        <span>Ванная</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div id="floor-image-display" class="hidden lg:flex flex-col justify-center items-center"><img id="floor-img" src="" alt="Фото помещения" class="w-full h-auto rounded-lg shadow-lg" loading="lazy" onerror="console.error('Image failed:', this.src); this.style.background='#E5D5C8';">
+    <p class="text-xs text-warmgray mt-3 text-center">Кликните на помещение для просмотра</p>
+   </div>
+   <div id="floor-2" class="floor-content hidden">
+    <h3 class="font-serif text-xl font-light text-charcoal mb-4">Планировка 2 этажа</h3>
+    <div class="space-y-2">
+     <div class="flex justify-between p-3 bg-cream rounded-lg">
+      <span class="text-sm font-semibold text-charcoal">Спальня 1</span> <span class="text-sm text-warmgray">18 м²</span>
+     </div>
+     <div class="flex justify-between p-3 bg-cream rounded-lg">
+      <span class="text-sm font-semibold text-charcoal">Спальня 2</span> <span class="text-sm text-warmgray">15 м²</span>
+     </div>
+     <div class="flex justify-between p-3 bg-cream rounded-lg">
+      <span class="text-sm font-semibold text-charcoal">Кабинет</span> <span class="text-sm text-warmgray">12 м²</span>
+     </div>
+     <div class="flex justify-between p-3 bg-cream rounded-lg">
+      <span class="text-sm font-semibold text-charcoal">Ванная комната</span> <span class="text-sm text-warmgray">8 м²</span>
+     </div>
+     <div class="flex justify-between p-3 bg-cream rounded-lg">
+      <span class="text-sm font-semibold text-charcoal">Коридор</span> <span class="text-sm text-warmgray">6 м²</span>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="flex items-center justify-center p-8 bg-cream rounded-lg mt-8">
+   <img src="images/plan1lev.webp" alt="План 1 этажа" class="w-full h-auto rounded-lg shadow-lg" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#E5D5C8';">
+  </div>
+ </div>
+</main>
+<footer class="border-t border-cream bg-white py-12 mt-12">
+ <div class="max-w-6xl mx-auto px-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 pb-8 border-b border-cream">
+   <div>
+    <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-3">О нас</p>
+    <p class="text-sm text-warmgray">Честный и прозрачный аукцион по продаже недвижимости.</p>
+   </div>
+   <div>
+    <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-3">Как участвовать</p>
+    <ol class="text-sm text-warmgray space-y-1">
+     <li>1. Позвоните</li>
+     <li>2. Оставьте ставку</li>
+     <li>3. Ждите результата</li>
+    </ol>
+   </div>
+   <div>
+    <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-3">Контакты</p><a href="tel:+79873927902" class="text-sm text-gold hover:text-charcoal">+7 987 392-79-02</a>
+    <p class="text-xs text-warmgray mt-2">Пн–Пт: 8:00–20:00 МСК</p>
+   </div>
+   <div>
+    <p class="text-xs text-warmgray uppercase tracking-wider font-semibold mb-3">Статус</p>
+    <div class="flex items-center gap-2">
+     <span class="w-2 h-2 bg-green-500 rounded-full"></span> <span class="text-sm text-green-700 font-semibold">Аукцион активен</span>
+    </div>
+   </div>
+  </div>
+  <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-warmgray">
+   <p>© 2025 Аукцион «Семьяны» | Все права защищены</p>
+   <p class="mt-3 sm:mt-0">Сайт информационный. Заявки принимаются по телефону.</p>
+  </div>
+ </div>
+</footer>
+<div id="bidModal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-backdrop px-4 py-6">
+ <div class="bg-white w-full max-w-md rounded-lg shadow-2xl max-h-[90vh] overflow-y-auto fade-in">
+  <div class="sticky top-0 bg-white border-b border-cream p-6 flex justify-between items-center">
+   <div>
+    <p class="text-xs uppercase tracking-wider text-gold font-semibold">Участие в аукционе</p>
+    <h3 class="font-serif text-xl font-light text-charcoal">Новая ставка</h3>
+   </div><button class="close-bid-modal p-2 hover:bg-cream rounded-lg"> <i data-lucide="x" style="width:20px;height:20px;color:#6B6560;"></i> </button>
+  </div>
+  <div class="p-6 space-y-4">
+   <div id="successMsg" class="hidden p-4 bg-green-50 border border-green-200 rounded-lg flex gap-3">
+    <i data-lucide="check-circle" style="width:20px;height:20px;color:#4CAF50;flex-shrink:0;"></i>
+    <div>
+     <p class="font-semibold text-green-700 text-sm">Ставка принята!</p>
+     <p class="text-sm text-green-600">Спасибо за участие.</p>
+    </div>
+   </div>
+   <div>
+    <label class="text-xs uppercase tracking-wider text-warmgray font-semibold block mb-2">Имя</label> <label
+           for="buyerName"> </label><input type="text" id="buyerName" placeholder="Иван Петров" class="w-full px-4 py-2.5 border border-cream rounded-lg bg-ivory input-focus">
+    <p class="error-text text-red-600 text-xs mt-1 hidden"></p>
+   </div>
+   <div>
+    <label class="text-xs uppercase tracking-wider text-warmgray font-semibold block mb-2">Телефон</label> <label
+           for="buyerPhone"> </label><input type="tel" id="buyerPhone" placeholder="+7 (987) 392-79-02" class="w-full px-4 py-2.5 border border-cream rounded-lg bg-ivory input-focus">
+    <p class="error-text text-red-600 text-xs mt-1 hidden"></p>
+    <p class="text-xs text-warmgray mt-2">Номер будет опубликован частично</p>
+   </div>
+   <div>
+    <label class="text-xs uppercase tracking-wider text-warmgray font-semibold block mb-2">Ставка (₽)</label> <label
+           for="bidAmount"> </label><input type="number" id="bidAmount" placeholder="1000000" min="850000" class="w-full px-4 py-2.5 border border-cream rounded-lg bg-ivory input-focus">
+    <p class="error-text text-red-600 text-xs mt-1 hidden"></p>
+    <p id="bidHint" class="text-xs text-warmgray mt-2">Минимум: 850 000 ₽</p>
+   </div><button id="submitBtn" class="w-full py-3 bg-charcoal text-white text-sm font-semibold hover:bg-gold transition-colors rounded-lg flex items-center justify-center gap-2"> <i data-lucide="send" style="width:16px;height:16px;"></i> Отправить ставку </button>
+   <div class="text-center border-t border-cream pt-4">
+    <p class="text-xs text-warmgray mb-2">Или звоните:</p><a href="tel:+79873927902" class="inline-flex items-center gap-2 px-4 py-2 border border-gold text-gold hover:bg-gold hover:text-white transition-colors rounded-lg text-sm font-semibold"> <i data-lucide="phone" style="width:16px;height:16px;"></i> +7 987 392-79-02 </a>
+   </div>
+  </div>
+ </div>
+</div>
+<div id="infoModal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-backdrop px-4 py-6">
+ <div class="bg-white w-full max-w-2xl rounded-lg shadow-2xl max-h-[90vh] overflow-y-auto fade-in">
+  <div class="sticky top-0 bg-white border-b border-cream p-6 flex justify-between items-center">
+   <h3 class="font-serif text-xl font-light text-charcoal">Об объекте</h3><button class="close-info-modal p-2 hover:bg-cream rounded-lg"> <i data-lucide="x" style="width:20px;height:20px;color:#6B6560;"></i> </button>
+  </div>
+  <div class="p-6 space-y-6">
+   <div>
+    <p class="text-xs text-gold uppercase tracking-wider font-semibold mb-2">Местоположение</p>
+    <p class="text-warmgray leading-relaxed text-sm">Россия, Нижегородская область, Воротынский район, село Семьяны, улица Безводная, дом 42</p>
+   </div>
+   <div class="border-t border-cream pt-6">
+    <p class="text-xs text-gold uppercase tracking-wider font-semibold mb-3">Описание дома</p>
+    <ul class="text-warmgray text-sm space-y-2">
+     <li>✓ Общая площадь: 74 м²</li>
+     <li>✓ Жилая площадь: 50 м²</li>
+     <li>✓ Участок: 43 сотки</li>
+     <li>✓ Построен в 2003 году</li>
+     <li>✓ Баня с предбанником</li>
+     <li>✓ Крытый погреб</li>
+     <li>✓ Центральное водоснабжение и газификация</li>
+    </ul>
+   </div>
+   <div class="border-t border-cream pt-6">
+    <p class="text-xs text-gold uppercase tracking-wider font-semibold mb-2">Состояние</p>
+    <p class="text-warmgray text-sm">Дом в целом пригоден для проживания, требуется ремонт засыпной шахты внешней стены. Ориентировочная стоимость ремонта: от 150 000 рублей.</p>
+   </div>
+  </div>
+ </div>
+</div>
+<script>
+ lucide.createIcons();
+
+ // ===== Config & SDK =====
+ const defaultConfig = {
+   property_title: 'Частный дом в селе Семьяны',
+   property_description: 'Жилой дом на участке 43 сотки',
+   starting_price: '850000',
+   target_price: '1750000',
+   bid_step: '150000',
+   contact_phone: '+79873927902',
+   property_area: '74',
+   land_area: '43',
+   end_date: '15.07.2026',
+   background_color: '#FAF9F6',
+   surface_color: '#FFFFFF',
+   text_color: '#1A1A1A',
+   primary_action_color: '#1A1A1A',
+   secondary_action_color: '#8B7355',
+   font_family: 'Cormorant Garamond',
+   font_size: 16
+ };
+
+ function formatPrice(val) {
+   return parseInt(val).toLocaleString('ru-RU') + ' ₽';
+ }
+
+ function applyConfig(cfg) {
+   const c = { ...defaultConfig, ...cfg };
+   document.getElementById('propertyTitle').textContent = c.property_title;
+   document.getElementById('propertyDesc').textContent = c.property_description;
+   document.getElementById('startingPrice').textContent = formatPrice(c.starting_price);
+   document.getElementById('targetPrice').textContent = formatPrice(c.target_price);
+   document.getElementById('bidStep').textContent = formatPrice(c.bid_step);
+   document.getElementById('endDate').textContent = c.end_date;
+   document.getElementById('houseArea').textContent = c.property_area + ' м²';
+   document.getElementById('landArea').textContent = c.land_area + ' соток';
+   document.getElementById('bidHint').textContent = 'Минимум: ' + formatPrice(c.starting_price);
+   document.getElementById('bidAmount').min = c.starting_price;
+   document.body.style.backgroundColor = c.background_color;
+
+   const fontFamily = `${c.font_family}, Georgia, serif`;
+   document.querySelectorAll('.font-serif').forEach(el => {
+     el.style.fontFamily = fontFamily;
+   });
+ }
+
+ window.elementSdk.init({
+   defaultConfig,
+   onConfigChange: (cfg) => applyConfig(cfg),
+   mapToCapabilities: (cfg) => ({
+     recolorables: [
+       { get: () => cfg.background_color || defaultConfig.background_color, set: (v) => { cfg.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+       { get: () => cfg.surface_color || defaultConfig.surface_color, set: (v) => { cfg.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+       { get: () => cfg.text_color || defaultConfig.text_color, set: (v) => { cfg.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+       { get: () => cfg.primary_action_color || defaultConfig.primary_action_color, set: (v) => { cfg.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); } },
+       { get: () => cfg.secondary_action_color || defaultConfig.secondary_action_color, set: (v) => { cfg.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); } }
+     ],
+     borderables: [],
+     fontEditable: { get: () => cfg.font_family || defaultConfig.font_family, set: (v) => { cfg.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+     fontSizeable: { get: () => cfg.font_size || defaultConfig.font_size, set: (v) => { cfg.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+   }),
+   mapToEditPanelValues: (cfg) => new Map([
+     ['property_title', cfg.property_title || defaultConfig.property_title],
+     ['property_description', cfg.property_description || defaultConfig.property_description],
+     ['starting_price', cfg.starting_price || defaultConfig.starting_price],
+     ['target_price', cfg.target_price || defaultConfig.target_price],
+     ['bid_step', cfg.bid_step || defaultConfig.bid_step],
+     ['contact_phone', cfg.contact_phone || defaultConfig.contact_phone],
+     ['property_area', cfg.property_area || defaultConfig.property_area],
+     ['land_area', cfg.land_area || defaultConfig.land_area],
+     ['end_date', cfg.end_date || defaultConfig.end_date]
+   ])
+ });
+
+ applyConfig(defaultConfig);
+
+ // ===== Data SDK =====
+ let allBids = [];
+
+ const dataHandler = {
+   onDataChanged(data) {
+     allBids = data.sort((a, b) => b.bid_amount - a.bid_amount);
+     renderLeaders();
+   }
+ };
+
+ window.dataSdk.init(dataHandler);
+
+ function maskPhone(phone) {
+   const clean = phone.replace(/\D/g, '');
+   const last4 = clean.slice(-4);
+   return `+7 (${clean.slice(1, 4)}) ***-**-${last4}`;
+ }
+
+ function renderLeaders() {
+   const container = document.getElementById('leadersList');
+   const top3 = allBids.slice(0, 3);
+
+   if (top3.length === 0) {
+     container.innerHTML = `
+       <div class="p-8 text-center">
+         <i data-lucide="users" style="width:40px;height:40px;color:#8B7355;opacity:0.3;margin:0 auto 1rem;"></i>
+         <p class="text-warmgray">Пока нет участников. Будьте первым!</p>
+       </div>
+     `;
+     lucide.createIcons();
+     return;
+   }
+
+   const badges = ['badge-gold', 'badge-silver', 'badge-bronze'];
+   let html = '';
+   top3.forEach((bid, i) => {
+     html += `
+       <div class="flex items-center gap-4 p-6 hover:bg-cream transition-colors">
+         <div class="leader-badge ${badges[i]}">${i + 1}</div>
+         <div class="flex-1">
+           <p class="font-semibold text-charcoal">${bid.buyer_name}</p>
+           <p class="text-xs text-warmgray">${maskPhone(bid.buyer_phone)}</p>
+         </div>
+         <div class="text-right">
+           <p class="font-serif font-semibold text-gold text-lg">${parseInt(bid.bid_amount).toLocaleString('ru-RU')} ₽</p>
+           <p class="text-xs text-warmgray">${new Date(bid.bid_date).toLocaleDateString('ru-RU')}</p>
+         </div>
+       </div>
+     `;
+   });
+
+   container.innerHTML = html;
+   lucide.createIcons();
+ }
+
+ // ===== Tab Navigation =====
+ document.querySelectorAll('.tab-button').forEach(btn => {
+   btn.addEventListener('click', (e) => {
+     e.preventDefault();
+     const tabName = btn.getAttribute('data-tab');
+
+     document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+
+     btn.classList.add('active');
+     document.getElementById(tabName).classList.add('active');
+   });
+ });
+
+ // ===== Floor Image Display =====
+ function showFloorImage(imageSrc) {
+   const display = document.getElementById('floor-image-display');
+   const img = document.getElementById('floor-img');
+   img.src = imageSrc;
+   display.classList.remove('hidden');
+ }
+
+ // ===== Floor Tab Navigation =====
+ document.querySelectorAll('.floor-tab-btn').forEach(btn => {
+   btn.addEventListener('click', (e) => {
+     e.preventDefault();
+     const floor = btn.getAttribute('data-floor');
+
+     document.querySelectorAll('.floor-tab-btn').forEach(b => {
+       b.classList.remove('active');
+       b.style.borderBottomColor = 'transparent';
+     });
+     document.querySelectorAll('.floor-content').forEach(c => c.classList.add('hidden'));
+
+     btn.classList.add('active');
+     btn.style.borderBottomColor = '#8B7355';
+     document.getElementById('floor-' + floor).classList.remove('hidden');
+   });
+ });
+
+ // ===== Modal Controls =====
+ document.querySelectorAll('.open-bid-modal').forEach(btn => {
+   btn.addEventListener('click', () => {
+     document.getElementById('bidModal').classList.remove('hidden');
+     document.getElementById('successMsg').classList.add('hidden');
+   });
+ });
+
+ document.getElementById('bidCtaBtn').addEventListener('click', () => {
+   document.getElementById('bidModal').classList.remove('hidden');
+   document.getElementById('successMsg').classList.add('hidden');
+ });
+
+ document.querySelectorAll('.close-bid-modal').forEach(btn => {
+   btn.addEventListener('click', () => {
+     document.getElementById('bidModal').classList.add('hidden');
+   });
+ });
+
+ document.querySelectorAll('.open-info-modal').forEach(btn => {
+   btn.addEventListener('click', () => {
+     document.getElementById('infoModal').classList.remove('hidden');
+   });
+ });
+
+ document.querySelectorAll('.close-info-modal').forEach(btn => {
+   btn.addEventListener('click', () => {
+     document.getElementById('infoModal').classList.add('hidden');
+   });
+ });
+
+ document.getElementById('bidModal').addEventListener('click', (e) => {
+   if (e.target.id === 'bidModal') e.target.classList.add('hidden');
+ });
+
+ document.getElementById('infoModal').addEventListener('click', (e) => {
+   if (e.target.id === 'infoModal') e.target.classList.add('hidden');
+ });
+
+ // ===== Form =====
+ async function submitBid() {
+   const name = document.getElementById('buyerName').value.trim();
+   const phone = document.getElementById('buyerPhone').value.trim();
+   const bid = document.getElementById('bidAmount').value.trim();
+   const minBid = parseInt(defaultConfig.starting_price);
+
+   const inputs = [
+     { el: document.getElementById('buyerName'), regex: /.+/ },
+     { el: document.getElementById('buyerPhone'), regex: /^\+?7\s?\(?9\d{2}\)?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/ },
+     { el: document.getElementById('bidAmount'), regex: /^\d+$/, custom: (v) => parseInt(v) >= minBid }
+   ];
+
+   let valid = true;
+   inputs.forEach(inp => {
+     const error = inp.el.nextElementSibling;
+     if (!inp.regex.test(inp.el.value) || (inp.custom && !inp.custom(inp.el.value))) {
+       error.classList.remove('hidden');
+       valid = false;
+     } else {
+       error.classList.add('hidden');
+     }
+   });
+
+   if (!valid) return;
+
+   const btn = document.getElementById('submitBtn');
+   btn.disabled = true;
+   btn.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-gold rounded-full animate-spin"></div>';
+
+   try {
+     const res = await window.dataSdk.create({
+       id: Date.now().toString(),
+       buyer_name: name,
+       buyer_phone: phone,
+       bid_amount: parseInt(bid),
+       bid_date: new Date().toISOString(),
+       status: 'active'
+     });
+
+     if (res.isOk) {
+       document.getElementById('successMsg').classList.remove('hidden');
+       document.getElementById('buyerName').value = '';
+       document.getElementById('buyerPhone').value = '';
+       document.getElementById('bidAmount').value = '';
+       setTimeout(() => {
+         btn.disabled = false;
+         btn.innerHTML = '<i data-lucide="send" style="width:16px;height:16px;"></i> Отправить ставку';
+         lucide.createIcons();
+       }, 2000);
+     } else {
+       alert('Ошибка: ' + (res.error?.message || 'Попробуйте снова'));
+       btn.disabled = false;
+       btn.innerHTML = '<i data-lucide="send" style="width:16px;height:16px;"></i> Отправить ставку';
+       lucide.createIcons();
+     }
+   } catch (e) {
+     alert('Ошибка: ' + e.message);
+     btn.disabled = false;
+     btn.innerHTML = '<i data-lucide="send" style="width:16px;height:16px;"></i> Отправить ставку';
+     lucide.createIcons();
+   }
+ }
+
+ // ===== Toggle Floor Sublist =====
+ function toggleFloorSublist(element) {
+   const sublist = element.nextElementSibling;
+   const icon = element.querySelector('i[data-lucide="chevron-down"]');
+   
+   if (sublist.style.maxHeight) {
+     sublist.style.maxHeight = null;
+     icon.style.transform = 'rotate(0deg)';
+   } else {
+     sublist.style.maxHeight = sublist.scrollHeight + "px";
+     icon.style.transform = 'rotate(180deg)';
+   }
+ }
+ 
+ // Initialize Lucide icons
+ lucide.createIcons();
+
+ document.getElementById('submitBtn').addEventListener('click', submitBid);
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f74023374892b66',t:'MTc3ODAyODgxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
