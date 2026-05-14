@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ru" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Профиль участника — Аукцион Сотика Pro</title>
+
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .font-heading { font-family: "Playfair Display", serif; }
+    .card { @apply bg-[#020617] border border-[#1f2937] rounded-2xl shadow-lg; }
+    .nav-link { @apply text-xs md:text-sm font-semibold text-slate-300 hover:text-white transition-colors; }
+    .badge { @apply inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide; }
+  </style>
+</head>
+<body class="min-h-full bg-[#020617] text-slate-100">
+<header class="sticky top-0 z-40 bg-[#020617]/95 border-b border-[#020617] backdrop-blur-xl">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+    <a href="/auction" class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-[#e94560] flex items-center justify-center shadow-md shadow-[#e94560]/40">
+        <i data-lucide="user" class="w-5 h-5 text-white"></i>
+      </div>
+      <div class="hidden sm:flex flex-col">
+        <span class="font-heading text-base font-bold text-white leading-tight">Профиль участника</span>
+        <span class="text-[10px] uppercase tracking-[0.18em] text-slate-500">Аукцион Сотика Pro</span>
+      </div>
+    </a>
+
+    <nav class="flex items-center gap-4">
+      <a href="/auction" class="nav-link">Главная</a>
+      <a href="/auction/auction" class="nav-link">Онлайн‑торги</a>
+      <a href="/auction/profile" class="nav-link text-white">Профиль</a>
+      <a href="/auction/participants" class="nav-link hidden md:inline">Участники</a>
+      <a href="/auction/admin" class="nav-link hidden md:inline">Админ</a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 py-6 md:py-10 space-y-6">
+  <section class="grid lg:grid-cols-[1.1fr,1.2fr] gap-6 items-start">
+    <!-- Профиль -->
+    <div class="card p-5 md:p-6 space-y-4">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-[#e94560] to-[#f97316] flex items-center justify-center text-xl font-bold">
+          ДП
+        </div>
+        <div>
+          <h1 class="font-heading text-xl text-white">Демо‑участник</h1>
+          <p class="text-xs text-slate-400">ID: U‑0001 · Зарегистрирован: 2024‑10‑01</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-2 text-[11px]">
+        <span class="badge bg-emerald-500/10 text-emerald-300 border border-emerald-500/40">Верифицирован</span>
+        <span class="badge bg-sky-500/10 text-sky-300 border border-sky-500/40">Залог внесён</span>
+        <span class="badge bg-purple-500/10 text-purple-300 border border-purple-500/40">Доступ к торгам</span>
+      </div>
+
+      <div class="border-t border-slate-800 pt-4 space-y-2 text-xs md:text-sm">
+        <p><span class="text-slate-500">Email:</span> demo@sotika.ru</p>
+        <p><span class="text-slate-500">Телефон:</span> +7 (900) 000‑00‑00</p>
+        <p><span class="text-slate-500">Город:</span> Нижний Новгород</p>
+      </div>
+
+      <button class="mt-2 inline-flex items-center gap-2 text-xs text-slate-300 hover:text-white">
+        <i data-lucide="edit-3" class="w-4 h-4"></i> Редактировать профиль (демо)
+      </button>
+    </div>
+
+    <!-- Активность -->
+    <div class="card p-5 md:p-6 space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="font-heading text-lg text-white">Активность в аукционе</h2>
+        <span class="text-[11px] text-slate-500">Обновление в реальном времени (демо)</span>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-3 text-xs">
+        <div class="bg-slate-900/60 border border-slate-700/60 rounded-xl p-3">
+          <p class="text-slate-500 mb-1">Всего ставок</p>
+          <p class="text-lg font-semibold text-emerald-400">5</p>
+        </div>
+        <div class="bg-slate-900/60 border border-slate-700/60 rounded-xl p-3">
+          <p class="text-slate-500 mb-1">Выигранных лотов</p>
+          <p class="text-lg font-semibold text-sky-400">1</p>
+        </div>
+        <div class="bg-slate-900/60 border border-slate-700/60 rounded-xl p-3">
+          <p class="text-slate-500 mb-1">Текущие торги</p>
+          <p class="text-lg font-semibold text-amber-400">1</p>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-800 pt-4">
+        <h3 class="font-heading text-sm text-white mb-2">Последние ставки</h3>
+        <ul class="space-y-2 text-xs text-slate-300">
+          <li>• 1 250 000 ₽ — Лот №1 «Дом в Семьянах» (12:05:10)</li>
+          <li>• 1 100 000 ₽ — Лот №1 «Дом в Семьянах» (12:02:33)</li>
+          <li>• 950 000 ₽ — Лот №1 «Дом в Семьянах» (12:01:10)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- История -->
+  <section class="card p-5 md:p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="font-heading text-lg text-white">История участия</h2>
+      <span class="text-[11px] text-slate-500">Демо‑данные</span>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs md:text-sm text-left border-collapse">
+        <thead class="text-slate-400 border-b border-slate-800">
+        <tr>
+          <th class="py-2 pr-3">Лот</th>
+          <th class="py-2 pr-3">Последняя ставка</th>
+          <th class="py-2 pr-3">Статус</th>
+          <th class="py-2 pr-3 hidden sm:table-cell">Дата</th>
+        </tr>
+        </thead>
+        <tbody class="align-middle">
+        <tr class="border-b border-slate-900/60">
+          <td class="py-2 pr-3">Дом в Семьянах</td>
+          <td class="py-2 pr-3 text-emerald-400 font-semibold">1 250 000 ₽</td>
+          <td class="py-2 pr-3 text-amber-400">В торгах</td>
+          <td class="py-2 pr-3 hidden sm:table-cell text-slate-400">Сегодня</td>
+        </tr>
+        <tr class="border-b border-slate-900/60">
+          <td class="py-2 pr-3">Гараж, Н. Новгород</td>
+          <td class="py-2 pr-3 text-emerald-400 font-semibold">350 000 ₽</td>
+          <td class="py-2 pr-3 text-emerald-400">Выигран</td>
+          <td class="py-2 pr-3 hidden sm:table-cell text-slate-400">2024‑09‑15</td>
+        </tr>
+        <tr>
+          <td class="py-2 pr-3">Квартира, Автозавод</td>
+          <td class="py-2 pr-3 text-emerald-400 font-semibold">2 800 000 ₽</td>
+          <td class="py-2 pr-3 text-rose-400">Проигран</td>
+          <td class="py-2 pr-3 hidden sm:table-cell text-slate-400">2024‑08‑02</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<script>
+  if (window.lucide) window.lucide.createIcons();
+</script>
+</body>
+</html>
