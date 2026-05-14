@@ -20,7 +20,12 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm build
+        run: |
+          echo "Current directory contents:"
+          ls -la
+          echo "App directory contents:"
+          ls -la app/
+          pnpm build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
