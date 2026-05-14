@@ -1,5 +1,17 @@
 {
-  "outputDirectory": "out",
+  "build": {
+    "env": {}
+  },
+  "rewrites": [
+    { "source": "/", "destination": "/auction-site/index.html" },
+    { "source": "/admin", "destination": "/auction-site/admin.html" },
+    { "source": "/auction", "destination": "/auction-site/auction.html" },
+    { "source": "/docs", "destination": "/auction-site/docs.html" },
+    { "source": "/lot", "destination": "/auction-site/lot.html" },
+    { "source": "/participants", "destination": "/auction-site/participants.html" },
+    { "source": "/profile", "destination": "/auction-site/profile.html" },
+    { "source": "/(.*)", "destination": "/auction-site/$1" }
+  ],
   "cleanUrls": true,
   "trailingSlash": false
 }

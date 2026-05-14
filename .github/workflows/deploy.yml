@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy HTML to GitHub Pages
 
 on:
   push:
@@ -10,25 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build
-        run: |
-          echo "Current directory contents:"
-          ls -la
-          echo "App directory contents:"
-          ls -la app/
-          pnpm build
-
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+          publish_dir: ./auction-site

@@ -1,9 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
+    "dev": "node server.js",
+    "build": "echo \"Skip Next.js build for static deployment\"",
+    "start": "node server.js",
+    "start:next": "next start",
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
     "test": "pnpm prettier:check"
