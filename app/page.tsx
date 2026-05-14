@@ -15,7 +15,7 @@ export const metadata = {
   },
 };
 
-// Преобразованный HTML из auction-site/index.html
+// Преобразованн��й HTML из auction-site/index.html
 export default function HomePage() {
   // Получаем корзину для CartProvider
   const cart = getCart();
@@ -198,5 +198,4 @@ export default function HomePage() {
                      alt="Фасад дома" className="w-full h-40 object-cover" />
                 <p className="px-4 py-3 text-sm">Фасад дома</p>
               </div>
-              <div className="bg-[#16213e] border border-[#0f3460] rounded-2xl shadow-lg overflow-hidden">
-                <img src="https://images.pexels.com/photos/1571460/pexels-photo
+              <div className="bg-[#16213e] border border-[#0f3460] rounded-2xl shadow-lg overflow-hidden

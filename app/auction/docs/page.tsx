@@ -1,113 +1,102 @@
-<!doctype html>
-<html lang="ru" class="h-full">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Документация и условия — Аукцион Сотика Pro</title>
+"use client";
 
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+import { Footer } from "components/layout/footer";
+import { Navbar } from "components/layout/navbar";
+import { CartProvider } from "components/cart/cart-context";
+import { getCart } from "lib/shopify";
+import { Toaster } from "sonner";
+import { Suspense } from "react";
 
-  <style>
-    body { font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    .font-heading { font-family: "Playfair Display", serif; }
-    .card { @apply bg-[#020617] border border-[#1f2937] rounded-2xl shadow-lg; }
-    .nav-link { @apply text-xs md:text-sm font-semibold text-slate-300 hover:text-white transition-colors; }
-    .doc-item { @apply flex items-start gap-3 text-sm text-slate-200; }
-    .doc-icon { @apply w-4 h-4 text-[#fbbf24] mt-0.5 flex-shrink-0; }
-  </style>
-</head>
-<body class="min-h-full bg-[#020617] text-slate-100">
-<header class="sticky top-0 z-40 bg-[#020617]/95 border-b border-[#020617] backdrop-blur-xl">
-  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-    <a href="/auction" class="flex items-center gap-3">
-      <div class="w-9 h-9 rounded-xl bg-[#e94560] flex items-center justify-center shadow-md shadow-[#e94560]/40">
-        <i data-lucide="file-text" class="w-5 h-5 text-white"></i>
+export const metadata = {
+  title: "Документы - Аукцион недвижимости",
+  description: "Полный пакет документов для участия в аукционе по продаже дома в Семьянах, Нижегородская область."
+};
+
+export default function DocsPage() {
+  const cart = getCart();
+
+  return (
+    <CartProvider cartPromise={cart}>
+      <div className="min-h-full bg-[#1a1a2e] text-[#e0e0e0]">
+        <Navbar />
+        <main className="pb-10">
+          <section className="hero-gradient border-b border-[#0f172a]">
+            <div className="max-w-7xl mx-auto px-4 py-10 md:py-16">
+              <div className="text-center mb-8">
+                <p className="text-[#e94560] font-semibold tracking-[0.25em] uppercase text-[11px] mb-3">
+                  Документы
+                </p>
+                <h1 className="font-heading text-3xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
+                  Полный пакет документов
+                </h1>
+                <p className="text-[#a0aec0] text-sm md:text-base mb-6 max-w-2xl mx-auto">
+                  Все необходимые документы для участия в аукционе и проверки объекта недвижимости.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section className="max-w-7xl mx-auto px-4 py-10">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="bg-[#16213e] border border-[#0f3460] rounded-2xl shadow-lg p-6">
+                <h2 className="text-xl font-bold text-white mb-4">Кадастровый паспорт</h2>
+                <p className="text-[#a0aec0] mb-4">Официальный документ, подтверждающий характеристики земельного участка и расположенного на нем объекта недвижимости.</p>
+                <a href="#" className="inline-flex items-center gap-2 text-[#e94560] hover:text-[#d63851]">
+                  <i data-lucide="download" className="w-4 h-4"></i>
+                  Скачать PDF
+                </a>
+              </div>
+
+              <div className="bg-[#16213e] border border-[#0f3460] rounded-2xl shadow-lg p-6">
+                <h2 className="text-xl font-bold text-white mb-4">Технический паспорт</h2>
+                <p className="text-[#a0aec0] mb-4">Документ, содержащий подробную информацию о технических характеристиках здания, его планировке и состоянии.</p>
+                <a href="#" className="inline-flex items-center gap-2 text-[#e94560] hover:text-[#d63851]">
+                  <i data-lucide="download" className="w-4 h-4"></i>
+                  Скачать PDF
+                </a>
+              </div>
+
+              <div className="bg-[#16213e] border border-[#0f3460] rounded-2xl shadow-lg p-6">
+                <h2 className="text-xl font-bold text-white mb-4">План участка</h2>
+                <p className="text-[#a0aec0] mb-4">Графическое изображение земельного участка с указанием границ, расположения построек и других объектов.</p>
+                <a href="#" className="inline-flex items-center gap-2 text-[#e94560] hover:text-[#d63851]">
+                  <i data-lucide="download" className="w-4 h-4"></i>
+                  Скачать PDF
+                </a>
+              </div>
+
+              <div className="bg-[#16213e] border border-[#0f3460] rounded-2xl shadow-lg p-6">
+                <h2 className="text-xl font-bold text-white mb-4">Выписка из ЕГРН</h2>
+                <p className="text-[#a0aec0] mb-4">Официальный документ, подтверждающий право собственности на объект недвижимости и отсутствие обременений.</p>
+                <a href="#" className="inline-flex items-center gap-2 text-[#e94560] hover:text-[#d63851]">
+                  <i data-lucide="download" className="w-4 h-4"></i>
+                  Скачать PDF
+                </a>
+              </div>
+
+              <div className="bg-[#16213e] border border-[#0f3460] rounded-2xl shadow-lg p-6">
+                <h2 className="text-xl font-bold text-white mb-4">Акт осмотра</h2>
+                <p className="text-[#a0aec0] mb-4">Документ, составленный независимым экспертом после осмотра объекта недвижимости.</p>
+                <a href="#" className="inline-flex items-center gap-2 text-[#e94560] hover:text-[#d63851]">
+                  <i data-lucide="download" className="w-4 h-4"></i>
+                  Скачать PDF
+                </a>
+              </div>
+
+              <div className="bg-[#16213e] border border-[#0f3460] rounded-2xl shadow-lg p-6">
+                <h2 className="text-xl font-bold text-white mb-4">Условия аукциона</h2>
+                <p className="text-[#a0aec0] mb-4">Полный текст правил проведения аукциона, условий участия и порядка оформления сделки.</p>
+                <a href="#" className="inline-flex items-center gap-2 text-[#e94560] hover:text-[#d63851]">
+                  <i data-lucide="download" className="w-4 h-4"></i>
+                  Скачать PDF
+                </a>
+              </div>
+            </div>
+          </section>
+        </main>
+        <Footer />
       </div>
-      <div class="hidden sm:flex flex-col">
-        <span class="font-heading text-base font-bold text-white leading-tight">Документация и условия</span>
-        <span class="text-[10px] uppercase tracking-[0.18em] text-slate-500">Аукцион Сотика Pro</span>
-      </div>
-    </a>
-
-    <nav class="flex items-center gap-4">
-      <a href="/auction" class="nav-link">Главная</a>
-      <a href="/auction/auction" class="nav-link">Онлайн‑торги</a>
-      <a href="/auction/profile" class="nav-link">Профиль</a>
-      <a href="/auction/participants" class="nav-link">Участники</a>
-      <a href="/auction/admin" class="nav-link hidden md:inline">Админ</a>
-      <a href="/auction/docs" class="nav-link text-white">Документация</a>
-    </nav>
-  </div>
-</header>
-
-<main class="max-w-5xl mx-auto px-4 py-6 md:py-10 space-y-6">
-  <section class="card p-5 md:p-6 space-y-4">
-    <h1 class="font-heading text-xl md:text-2xl text-white">Правила аукциона Аукцион Сотика Pro</h1>
-    <p class="text-sm text-slate-300">
-      Настоящий документ описывает ключевые правила участия в аукционе по продаже объекта недвижимости
-      «Дом в Семьянах» и порядок проведения торгов на платформе <strong>Аукцион Сотика Pro</strong>.
-    </p>
-
-    <div class="space-y-3 text-sm text-slate-200">
-      <h2 class="font-heading text-lg text-white mt-2">1. Общие положения</h2>
-      <p>1.1. Аукцион проводится на платформе <strong>Аукцион Сотика Pro</strong>.</p>
-      <p>1.2. Участие в аукционе означает полное согласие с настоящими правилами.</p>
-      <p>1.3. Организатор оставляет за собой право приостанавливать торги при технических сбоях или нарушениях правил.</p>
-
-      <h2 class="font-heading text-lg text-white mt-4">2. Регистрация участников</h2>
-      <p>2.1. Для участия в аукционе пользователь обязан пройти регистрацию на платформе.</p>
-      <p>2.2. Для допуска к торгам участник вносит регистрационный взнос <strong>50 000 ₽</strong>.</p>
-      <p>2.3. Эти средства направляются <strong>регуляторам аукциона</strong> и <strong>не возвращаются</strong>, если участник отказывается от участия.</p>
-
-      <h2 class="font-heading text-lg text-white mt-4">3. Порядок торгов</h2>
-      <p>3.1. Торги проходят в онлайн-режиме на странице лота.</p>
-      <p>3.2. Участники делают ставки, соблюдая минимальный шаг, установленный системой.</p>
-      <p>3.3. Все ставки фиксируются автоматически и отображаются в интерфейсе аукциона.</p>
-      <p>3.4. При одинаковых ставках преимущество получает участник, сделавший ставку раньше.</p>
-
-      <h2 class="font-heading text-lg text-white mt-4">4. Завершение аукциона</h2>
-      <p>4.1. Аукцион завершается в момент, когда участник предложит наивысшую ставку, <strong>превышающую целевую цену лота</strong>.</p>
-      <p>4.2. После достижения целевой цены система автоматически фиксирует победителя.</p>
-      <p>4.3. Победитель обязан оплатить итоговую сумму в течение <strong>5 рабочих дней</strong>.</p>
-
-      <h2 class="font-heading text-lg text-white mt-4">5. Ответственность сторон</h2>
-      <p>5.1. Организатор не несёт ответственности за технические проблемы на стороне участника.</p>
-      <p>5.2. Все спорные ситуации решаются путём переговоров; при невозможности — решением организатора.</p>
-
-      <h2 class="font-heading text-lg text-white mt-4">6. Контакты</h2>
-      <p>6.1. <strong>Платформа:</strong> Аукцион Сотика Pro</p>
-      <p>6.2. <strong>Email:</strong> info@sotika.pro</p>
-      <p>6.3. <strong>Телефон:</strong> +7 920 000‑00‑42</p>
-    </div>
-  </section>
-
-  <section class="card p-5 md:p-6 space-y-3">
-    <h2 class="font-heading text-lg text-white mb-2">Перечень документов (кратко)</h2>
-    <ul class="space-y-2">
-      <li class="doc-item">
-        <i data-lucide="file-text" class="doc-icon"></i>
-        Свидетельство о праве собственности на дом и земельный участок
-      </li>
-      <li class="doc-item">
-        <i data-lucide="file-text" class="doc-icon"></i>
-        Кадастровый паспорт и выписка из ЕГРН
-      </li>
-      <li class="doc-item">
-        <i data-lucide="file-text" class="doc-icon"></i>
-        Технический план БТИ
-      </li>
-      <li class="doc-item">
-        <i data-lucide="file-text" class="doc-icon"></i>
-        Проект договора купли‑продажи
-      </li>
-    </ul>
-  </section>
-</main>
-
-<script>
-  if (window.lucide) window.lucide.createIcons();
-</script>
-</body>
-</html>
+      <Toaster />
+    </CartProvider>
+  );
+}

@@ -1,4 +1,4 @@
-i32198154mport type { Metadata } from "next";
+import type { Metadata } from "next";
 
 import Prose from "components/prose";
 import { getPage } from "lib/shopify";

@@ -1,115 +1,148 @@
-<!doctype html>
-<html lang="ru" class="h-full">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Админ‑панель — Аукцион Сотика Pro</title>
+"use client";
 
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+import { Footer } from "components/layout/footer";
+import { Navbar } from "components/layout/navbar";
+import { CartProvider } from "components/cart/cart-context";
+import { getCart } from "lib/shopify";
+import { Toaster } from "sonner";
+import { Suspense } from "react";
 
-  <style>
-    body { font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    .font-heading { font-family: "Playfair Display", serif; }
-    .card { @apply bg-[#020617] border border-[#1f2937] rounded-2xl shadow-lg; }
-    .nav-link { @apply text-xs md:text-sm font-semibold text-slate-300 hover:text-white transition-colors; }
-    .badge { @apply inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide; }
-    .btn-primary { @apply inline-flex items-center justify-center px-4 py-2 rounded-lg bg-[#e94560] text-white text-xs font-semibold hover:bg-[#d63851] transition; }
-  </style>
-</head>
-<body class="min-h-full bg-[#020617] text-slate-100">
-<header class="sticky top-0 z-40 bg-[#020617]/95 border-b border-[#020617] backdrop-blur-xl">
-  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-    <a href="/auction" class="flex items-center gap-3">
-      <div class="w-9 h-9 rounded-xl bg-[#e94560] flex items-center justify-center shadow-md shadow-[#e94560]/40">
-        <i data-lucide="shield" class="w-5 h-5 text-white"></i>
+export const metadata = {
+  title: "Админ-панель - Аукцион недвижимости",
+  description: "Административная панель управления аукционом по продаже дома в Семьянах, Нижегородская область."
+};
+
+export default function AdminPage() {
+  const cart = getCart();
+
+  return (
+    <CartProvider cartPromise={cart}>
+      <div className="min-h-full bg-[#1a1a2e] text-[#e0e0e0]">
+        <Navbar />
+        <main className="pb-10">
+          <section className="hero-gradient border-b border-[#0f172a]">
+            <div className="max-w-7xl mx-auto px-4 py-10 md:py-16">
+              <div className="text-center mb-8">
+                <p className="text-[#e94560] font-semibold tracking-[0.25em] uppercase text-[11px] mb-3">
+                  Административная панель
+                </p>
+                <h1 className="font-heading text-3xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
+                  Управление аукционом
+                </h1>
+                <p className="text-[#a0aec0] text-sm md:text-base mb-6 max-w-2xl mx-auto">
+                  Полный контроль над процессом аукциона, участниками и ставками.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section className="max-w-7xl mx-auto px-4 py-10">
+            <div className="grid lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-1">
+                <nav className="bg-[#16213e] border border-[#0f3460] rounded-2xl shadow-lg overflow-hidden">
+                  <ul className="divide-y divide-[#0f3460]">
+                    <li>
+                      <a href="#" className="block px-6 py-4 text-white font-medium bg-[#0f3460]">
+                        Обзор
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="block px-6 py-4 text-[#a0aec0] hover:text-white">
+                        Участники
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="block px-6 py-4 text-[#a0aec0] hover:text-white">
+                        Ставки
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="block px-6 py-4 text-[#a0aec0] hover:text-white">
+                        Документы
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="block px-6 py-4 text-[#a0aec0] hover:text-white">
+                        Настройки
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+
+              <div className="lg:col-span-2 space-y-6">
+                <div className="bg-[#16213e] border border-[#0f3460] rounded-2xl shadow-lg p-6">
+                  <h2 className="text-xl font-bold text-white mb-6">Статистика аукциона</h2>
+                  
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <div className="bg-[#0f3460] rounded-xl p-4 text-center">
+                      <p className="text-[#a0aec0] text-xs uppercase tracking-wide">Текущая ставка</p>
+                      <p className="text-[#4ade80] font-bold text-lg">950 000 ₽</p>
+                    </div>
+                    <div className="bg-[#0f3460] rounded-xl p-4 text-center">
+                      <p className="text-[#a0aec0] text-xs uppercase tracking-wide">Всего ставок</p>
+                      <p className="text-[#fbbf24] font-bold text-lg">0</p>
+                    </div>
+                    <div className="bg-[#0f3460] rounded-xl p-4 text-center">
+                      <p className="text-[#a0aec0] text-xs uppercase tracking-wide">Участников</p>
+                      <p className="text-[#e94560] font-bold text-lg">1</p>
+                    </div>
+                    <div className="bg-[#0f3460] rounded-xl p-4 text-center">
+                      <p className="text-[#a0aec0] text-xs uppercase tracking-wide">Залогов</p>
+                      <p className="text-[#4ade80] font-bold text-lg">100 000 ₽</p>
+                    </div>
+                  </div>
+                  
+                  <div className="h-64 bg-[#0f172a] rounded-xl flex items-center justify-center">
+                    <p className="text-[#a0aec0]">График ставок</p>
+                  </div>
+                </div>
+
+                <div className="bg-[#16213e] border border-[#0f3460] rounded-2xl shadow-lg p-6">
+                  <h2 className="text-xl font-bold text-white mb-6">Последние действия</h2>
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-center p-3 bg-[#0f172a] rounded-lg">
+                      <div className="h-8 w-8 rounded-full bg-[#4ade80]/20 flex items-center justify-center mr-3">
+                        <i data-lucide="user-plus" className="w-4 h-4 text-[#4ade80]"></i>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium text-white">Новый участник</p>
+                        <p className="text-xs text-[#a0aec0]">Александр Петров зарегистрировался как участник</p>
+                      </div>
+                      <span className="text-xs text-[#a0aec0]">14:30</span>
+                    </div>
+                    
+                    <div className="flex items-center p-3 bg-[#0f172a] rounded-lg">
+                      <div className="h-8 w-8 rounded-full bg-[#4ade80]/20 flex items-center justify-center mr-3">
+                        <i data-lucide="download" className="w-4 h-4 text-[#4ade80]"></i>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium text-white">Документ скачан</p>
+                        <p className="text-xs text-[#a0aec0]">Кадастровый паспорт был скачан участником</p>
+                      </div>
+                      <span className="text-xs text-[#a0aec0]">14:15</span>
+                    </div>
+                    
+                    <div className="flex items-center p-3 bg-[#0f172a] rounded-lg">
+                      <div className="h-8 w-8 rounded-full bg-[#4ade80]/20 flex items-center justify-center mr-3">
+                        <i data-lucide="message-circle" className="w-4 h-4 text-[#4ade80]"></i>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium text-white">Сообщение</p>
+                        <p className="text-xs text-[#a0aec0]">Получен вопрос от участника о документах</p>
+                      </div>
+                      <span className="text-xs text-[#a0aec0]">14:05</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+        <Footer />
       </div>
-      <div class="hidden sm:flex flex-col">
-        <span class="font-heading text-base font-bold text-white leading-tight">Админ‑панель</span>
-        <span class="text-[10px] uppercase tracking-[0.18em] text-slate-500">Аукцион Сотика Pro</span>
-      </div>
-    </a>
-
-    <nav class="flex items-center gap-4">
-      <a href="/auction" class="nav-link">Главная</a>
-      <a href="/auction/auction" class="nav-link">Онлайн‑торги</a>
-      <a href="/auction/profile" class="nav-link">Профиль</a>
-      <a href="/auction/participants" class="nav-link">Участники</a>
-      <a href="/auction/admin" class="nav-link text-white">Админ</a>
-    </nav>
-  </div>
-</header>
-
-<main class="max-w-7xl mx-auto px-4 py-6 md:py-10 space-y-6">
-  <section class="grid lg:grid-cols-[1.2fr,1.1fr] gap-6 items-start">
-    <div class="card p-5 md:p-6 space-y-4">
-      <div class="flex items-center justify-between">
-        <h1 class="font-heading text-lg md:text-xl text-white">Управление лотом</h1>
-        <span class="badge bg-emerald-500/10 text-emerald-300 border border-emerald-500/40">Активен</span>
-      </div>
-
-      <div class="grid sm:grid-cols-2 gap-3 text-xs md:text-sm">
-        <div>
-          <label class="block text-slate-400 mb-1">Название лота</label>
-          <input type="text" value="Дом в Семьянах"
-                 class="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-sm text-slate-100">
-        </div>
-        <div>
-          <label class="block text-slate-400 mb-1">Стартовая цена, ₽</label>
-          <input type="number" value="950000"
-                 class="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-sm text-slate-100">
-        </div>
-        <div>
-          <label class="block text-slate-400 mb-1">Шаг ставки, ₽</label>
-          <input type="number" value="150000"
-                 class="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-sm text-slate-100">
-        </div>
-        <div>
-          <label class="block text-slate-400 mb-1">Целевая цена, ₽</label>
-          <input type="number" value="1750000"
-                 class="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-sm text-slate-100">
-        </div>
-      </div>
-
-      <div>
-        <label class="block text-slate-400 mb-1 text-xs">Описание</label>
-        <textarea rows="3" class="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-sm text-slate-100">Двухэтажный кирпичный дом с участком 0.5 га...</textarea>
-      </div>
-
-      <div class="flex flex-wrap gap-3">
-        <button class="btn-primary">
-          <i data-lucide="save" class="w-4 h-4 mr-1.5"></i> Сохранить (демо)
-        </button>
-        <button class="inline-flex items-center gap-2 text-xs text-slate-300 hover:text-white">
-          <i data-lucide="pause-circle" class="w-4 h-4"></i> Приостановить торги (демо)
-        </button>
-      </div>
-    </div>
-
-    <div class="card p-5 md:p-6 space-y-4 text-xs md:text-sm">
-      <h2 class="font-heading text-base text-white">Сводка по аукциону</h2>
-      <ul class="space-y-1 text-slate-300">
-        <li>• Участников допущено: <span class="text-emerald-400 font-semibold">2</span></li>
-        <li>• Ожидают залог: <span class="text-amber-400 font-semibold">1</span></li>
-        <li>• Всего ставок: <span class="text-emerald-400 font-semibold">8</span></li>
-        <li>• Текущая ставка: <span class="text-emerald-400 font-semibold">1 250 000 ₽</span></li>
-      </ul>
-
-      <div class="border-t border-slate-800 pt-4">
-        <h3 class="font-heading text-sm text-white mb-2">Логи действий (демо)</h3>
-        <ul class="space-y-1 text-[11px] text-slate-400">
-          <li>[12:05:10] U‑0001 сделал ставку 1 250 000 ₽</li>
-          <li>[12:02:33] U‑0003 сделал ставку 1 100 000 ₽</li>
-          <li>[12:01:10] U‑0001 сделал ставку 950 000 ₽</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-</main>
-
-<script>
-  if (window.lucide) window.lucide.createIcons();
-</script>
-</body>
-</html>
+      <Toaster />
+    </CartProvider>
+  );
+}
