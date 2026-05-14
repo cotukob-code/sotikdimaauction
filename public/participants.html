@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ru" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Участники — Аукцион Сотика Pro</title>
+
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .font-heading { font-family: "Playfair Display", serif; }
+    .card { @apply bg-[#020617] border border-[#1f2937] rounded-2xl shadow-lg; }
+    .nav-link { @apply text-xs md:text-sm font-semibold text-slate-300 hover:text-white transition-colors; }
+    .badge { @apply inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide; }
+  </style>
+</head>
+<body class="min-h-full bg-[#020617] text-slate-100">
+<header class="sticky top-0 z-40 bg-[#020617]/95 border-b border-[#020617] backdrop-blur-xl">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+    <a href="index.html" class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-[#e94560] flex items-center justify-center shadow-md shadow-[#e94560]/40">
+        <i data-lucide="users" class="w-5 h-5 text-white"></i>
+      </div>
+      <div class="hidden sm:flex flex-col">
+        <span class="font-heading text-base font-bold text-white leading-tight">Участники</span>
+        <span class="text-[10px] uppercase tracking-[0.18em] text-slate-500">Аукцион Сотика Pro</span>
+      </div>
+    </a>
+
+    <nav class="flex items-center gap-4">
+      <a href="index.html" class="nav-link">Главная</a>
+      <a href="auction.html" class="nav-link">Онлайн‑торги</a>
+      <a href="profile.html" class="nav-link">Профиль</a>
+      <a href="participants.html" class="nav-link text-white">Участники</a>
+      <a href="admin.html" class="nav-link hidden md:inline">Админ</a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 py-6 md:py-10 space-y-6">
+  <section class="card p-5 md:p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="font-heading text-lg md:text-xl text-white">Список участников аукциона</h1>
+      <span class="text-[11px] text-slate-500">Демо‑данные</span>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs md:text-sm text-left border-collapse">
+        <thead class="text-slate-400 border-b border-slate-800">
+        <tr>
+          <th class="py-2 pr-3">ID</th>
+          <th class="py-2 pr-3">Имя</th>
+          <th class="py-2 pr-3">Город</th>
+          <th class="py-2 pr-3">Статус</th>
+          <th class="py-2 pr-3 hidden sm:table-cell">Ставок</th>
+          <th class="py-2 pr-3 hidden sm:table-cell">Выиграно</th>
+        </tr>
+        </thead>
+        <tbody class="align-middle">
+        <tr class="border-b border-slate-900/60">
+          <td class="py-2 pr-3 text-slate-400">U‑0001</td>
+          <td class="py-2 pr-3">Демо‑участник</td>
+          <td class="py-2 pr-3">Нижний Новгород</td>
+          <td class="py-2 pr-3">
+            <span class="badge bg-emerald-500/10 text-emerald-300 border border-emerald-500/40">Допущен</span>
+          </td>
+          <td class="py-2 pr-3 hidden sm:table-cell">5</td>
+          <td class="py-2 pr-3 hidden sm:table-cell">1</td>
+        </tr>
+        <tr class="border-b border-slate-900/60">
+          <td class="py-2 pr-3 text-slate-400">U‑0002</td>
+          <td class="py-2 pr-3">Иван Петров</td>
+          <td class="py-2 pr-3">Бор</td>
+          <td class="py-2 pr-3">
+            <span class="badge bg-amber-500/10 text-amber-300 border border-amber-500/40">Ожидает залог</span>
+          </td>
+          <td class="py-2 pr-3 hidden sm:table-cell">0</td>
+          <td class="py-2 pr-3 hidden sm:table-cell">0</td>
+        </tr>
+        <tr>
+          <td class="py-2 pr-3 text-slate-400">U‑0003</td>
+          <td class="py-2 pr-3">Мария Соколова</td>
+          <td class="py-2 pr-3">Н. Новгород</td>
+          <td class="py-2 pr-3">
+            <span class="badge bg-emerald-500/10 text-emerald-300 border border-emerald-500/40">Допущен</span>
+          </td>
+          <td class="py-2 pr-3 hidden sm:table-cell">3</td>
+          <td class="py-2 pr-3 hidden sm:table-cell">0</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<script>
+  if (window.lucide) window.lucide.createIcons();
+</script>
+</body>
+</html>
